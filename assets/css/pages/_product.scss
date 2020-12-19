@@ -1,0 +1,22 @@
+.page__product {
+  .div-product {
+    display: none;
+
+    &.visible {display: block;}
+
+    &__card {
+      display: flex;
+      align-items: start;
+    }
+
+    img {width: 60vw;}
+
+    &__infos {
+      margin-left: 30px;
+      background-color: white;
+      padding: 30px;
+
+      > *:not(:last-child) {margin-bottom: 15px}
+    }
+  }
+}

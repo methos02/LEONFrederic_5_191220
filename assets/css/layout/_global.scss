@@ -1,0 +1,18 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  padding: 0 2em;
+  background-color: #6bb5c1;
+  min-height: calc(100vh - 72px);
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+h1, h2 {margin: 0}

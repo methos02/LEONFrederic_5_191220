@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Accueil - Orinoco</title>
+    <meta name="description" content="Site spécialisé dans la vente d'ourse en peluche">
+
+    <link rel="shortcut icon" href="assets/images/favicon.ico" />
+    <link href="assets/css/app.css" type="text/css" rel="stylesheet">
+
+    <script src="assets/js/commun.js" defer></script>
+    <script src="assets/js/product.js" defer></script>
+</head>
+<body>
+<nav>
+    <a href="index.html"><img src="assets/images/logo.png" alt="logo du site"></a>
+</nav>
+<div class="container page__product">
+    <section class="div-product" id="div-product">
+        <h1 data-product_name>Produit</h1>
+        <div class="div-product__card" id="product-card">
+            <img src="/assets/images/blank.png" alt="image du produit" data-product_image>
+            <div class="div-product__infos">
+                <div class="div-product__description" data-product_description></div>
+                <div class="div-product__colors">
+                    <label for="colors">Couleur :</label>
+                    <select id="colors" name="colors" data-product_colors>
+                        <option>null</option>
+                    </select>
+                </div>
+                <div class="div-product__price" data-product_price></div>
+                <button> Ajouter au panier </button>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

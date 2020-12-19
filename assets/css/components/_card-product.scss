@@ -1,0 +1,24 @@
+.card-product {
+  display: inline-block;
+  width: 25%;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+
+  img { width: 100%}
+
+  &-infos {
+    padding: 15px;
+
+    &__name {
+      margin: 0 0 15px;
+    }
+
+    &__price {
+      margin-top: 15px;
+      text-align: right;
+    }
+  }
+}
+
+.layout-card-product { display: none}
