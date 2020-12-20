@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Panier - Orinoco</title>
+    <meta name="description" content="Site spécialisé dans la vente d'ourse en peluche">
+
+    <link rel="shortcut icon" href="assets/images/favicon.ico" />
+    <link href="assets/css/app.css" type="text/css" rel="stylesheet">
+
+    <script src="assets/js/commun.js" defer></script>
+    <script src="assets/js/basket.js" defer></script>
+</head>
+<body>
+<nav>
+    <a href="index.html"><img src="assets/images/logo.png" alt="logo du site"></a>
+    <a href="panier.html">
+        <img src="assets/images/panier.png" alt="icone de panier">
+        <span> Panier </span>
+        <span id="nb_article"> 0 </span>
+    </a>
+</nav>
+<div class="container page__basket">
+    <section class="div-basket">
+        <table style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Couleur</th>
+                    <th>Nombre</th>
+                    <th>Prix Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-basket_name></td>
+                    <td data-basket_color></td>
+                    <td>
+                         <span>
+                            <button data-update_basket="-1"> - </button>
+                            <input name="basket_numb" title="Nombre de produit">
+                            <button data-update_basket="+1"> + </button>
+                        </span>
+                    </td>
+                    <td data-basket_price></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"></td>
+                    <td data-total_price></td>
+                </tr>
+            </tfoot>
+
+        </table>
+    </section>
+</div>
+</body>
+</html>

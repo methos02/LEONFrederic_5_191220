@@ -2,17 +2,14 @@ let template = document.getElementById('layout-card-product').firstElementChild;
 let div_products = document.getElementById('products');
 
 document.addEventListener("DOMContentLoaded", () => {
-    getProducts();
+    getProducts().then();
 });
 
-function getProducts() {
-    fetch('http://localhost:3000/api/teddies')
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function (products) {
-            products.map(function(product) { insertProducts(product) })
-        });
+async function getProducts() {
+    let productsJson =  await fetch('http://localhost:3000/api/teddies');
+    let products = await productsJson.json();
+
+    products.map(function(product) { insertProducts(product) })
 }
 
 function insertProducts(product) {

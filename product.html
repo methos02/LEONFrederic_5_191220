@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Accueil - Orinoco</title>
+    <title>Produit - Orinoco</title>
     <meta name="description" content="Site spécialisé dans la vente d'ourse en peluche">
 
     <link rel="shortcut icon" href="assets/images/favicon.ico" />
@@ -16,6 +16,11 @@
 <body>
 <nav>
     <a href="index.html"><img src="assets/images/logo.png" alt="logo du site"></a>
+    <a href="panier.html">
+        <img src="assets/images/panier.png" alt="icone de panier">
+        <span> Panier </span>
+        <span id="nb_article"> 0 </span>
+    </a>
 </nav>
 <div class="container page__product">
     <section class="div-product" id="div-product">
@@ -30,8 +35,20 @@
                         <option>null</option>
                     </select>
                 </div>
-                <div class="div-product__price" data-product_price></div>
-                <button> Ajouter au panier </button>
+                <div>
+                    <span>
+                        <label for="nb_product">Nombre :</label>
+                        <select id="nb_product" name="nb_product">
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                            <option value="3"> 3 </option>
+                            <option value="4"> 4 </option>
+                            <option value="5"> 5 </option>
+                        </select>
+                    </span>
+                    <span class="div-product__price" data-product_price=""></span>
+                </div>
+                <button id="add-basket"> Ajouter au panier </button>
             </div>
         </div>
     </section>
