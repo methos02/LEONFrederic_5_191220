@@ -1,15 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-    getProduct().then();
+    getProduct().then(product => updateWithBasket(product));
 
-    document.getElementById('add-basket').addEventListener('click', () => addBasket());
+    document.getElementById('add-basket').addEventListener('click', () => clickAddProduct(document.getElementById('div-product')));
     document.getElementById('nb_product').addEventListener('change', () => updatePrice());
 });
 
 async function getProduct() {
     let productJson = await fetch('http://localhost:3000/api/teddies/' + getIdProduct());
-    let product = await productJson.json()
-
-    insertProduct(product);
+    let product = await productJson.json();
+    return insertProduct(product);
 }
 
 function insertProduct(product) {
@@ -22,7 +21,23 @@ function insertProduct(product) {
     div_price.setAttribute('data-product_price', product.price);
     div_price.textContent = formatPrice(product.price);
 
-    document.getElementById('div-product').classList.add('visible')
+    document.querySelectorAll('[data-product_nb_update]').forEach(function (btn) {
+        btn.addEventListener('click', function() { changeNumberItems(this); });
+    });
+
+    let div_product = document.getElementById('div-product');
+    div_product.classList.add('visible');
+    return defineProduct(div_product);
+}
+
+function updateWithBasket(product) {
+    let basket = getBasket();
+    let product_index = getIndexProductInBasket(basket, product);
+
+    if(product_index !== -1) {
+        document.querySelector('input[name=product_numb]').value = product_index !== -1 ? basket.products[product_index].nb_product : 1;
+        updateBtnAdd()
+    }
 }
 
 function generateColorOptions(options) {
@@ -36,15 +51,10 @@ function getIdProduct() {
     return params.get('id');
 }
 
-function addBasket() {
-    let product = {
-        name : document.querySelector('[data-product_name]').textContent,
-        color: document.querySelector('[data-product_colors]').value,
-        nb_product : document.getElementById('nb_product').value,
-        price : document.querySelector('[data-product_price]').getAttribute('data-product_price')
-    }
-
-    document.getElementById('nb_article').textContent = saveInBasket(product);
+function clickAddProduct(container) {
+    let product = defineProduct(container);
+    document.getElementById('nb_article').textContent = basketAddOrUpdateProduct(product);
+    updateBtnAdd()
 }
 
 function updatePrice() {
@@ -52,4 +62,8 @@ function updatePrice() {
     let price = document.querySelector('[data-product_price]').getAttribute('data-product_price');
 
     document.querySelector('[data-product_price]').textContent = formatPrice(price * nb_product);
+}
+
+function updateBtnAdd() {
+    document.getElementById('add-basket').textContent = 'Modifier le panier';
 }

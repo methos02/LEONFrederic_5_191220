@@ -38,13 +38,11 @@
                 <div>
                     <span>
                         <label for="nb_product">Nombre :</label>
-                        <select id="nb_product" name="nb_product">
-                            <option value="1"> 1 </option>
-                            <option value="2"> 2 </option>
-                            <option value="3"> 3 </option>
-                            <option value="4"> 4 </option>
-                            <option value="5"> 5 </option>
-                        </select>
+                        <span class="product-row__number">
+                            <button data-product_nb_update="-1"> - </button>
+                            <input id="nb_product" name="product_numb" title="Nombre de produit" value="1">
+                            <button data-product_nb_update="+1"> + </button>
+                        </span>
                     </span>
                     <span class="div-product__price" data-product_price=""></span>
                 </div>

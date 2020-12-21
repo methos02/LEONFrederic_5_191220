@@ -14,19 +14,25 @@ function hydrateBasket() {
 function insertRow(product, index) {
     let row = template.cloneNode(true);
 
-    row.querySelector('[data-basket_name]').textContent = product.name;
-    row.querySelector('[data-basket_color]').textContent = product.color;
+    row.setAttribute('data-index', index);
+    row.querySelector('[data-product_name]').textContent = product.name;
+    row.querySelector('[data-product_color]').textContent = product.color;
+    row.querySelector('input[name=product_numb]').value = product.nb_product;
 
-    let input = row.querySelector('input[name=basket_numb]');
-    input.value = product.nb_product;
-    input.setAttribute('data-index', index);
-
-    let tr_price = row.querySelector('[data-basket_price]');
+    let tr_price = row.querySelector('[data-product_price]');
     tr_price.innerHTML = formatPrice(product.price * product.nb_product);
-    tr_price.setAttribute('data-basket_price', product.price);
+    tr_price.setAttribute('data-product_price', product.price);
 
-    row.querySelectorAll('[data-update_basket]').forEach(function (btn) {
-        btn.addEventListener('click', function() { updateBasket(this); });
+    row.querySelectorAll('[data-product_nb_update]').forEach(function (btn) {
+        btn.addEventListener('click', function() { changeNumberItems(this); });
+    });
+
+    row.querySelectorAll('input[name=product_numb]').forEach(function (input) {
+        input.addEventListener('change', function() { updateBasket(this); });
+    });
+
+    row.querySelectorAll('[data-product_delete]').forEach(function (btn) {
+        btn.addEventListener('click', function() { deleteBasketRow(this); });
     });
 
     tbody.appendChild(row);
@@ -34,7 +40,8 @@ function insertRow(product, index) {
 
 function calculTotalPrice() {
     let total_price = 0;
-    document.querySelectorAll('[data-basket_price]').forEach(function(td) {
+
+    document.querySelectorAll('[data-product_price]').forEach(function(td) {
         let price = parseInt(td.textContent.slice(0, -2));
 
         if( Number.isInteger(price) ) {
@@ -46,24 +53,33 @@ function calculTotalPrice() {
 }
 
 function updateBasket(btn) {
-    let input = btn.parentElement.querySelector('input');
-    let current_nb_items = parseInt(input.value);
-    let diff = parseInt(btn.getAttribute('data-update_basket'))
-    let nb_items = current_nb_items + diff;
+    let row = btn.closest('tr');
+    let product = defineProduct(row);
+    let nb_product = basketAddOrUpdateProduct(product);
 
-    if(nb_items < 1) {return;}
+    row.querySelector('[data-product_price]').textContent = product.total_price;
+    document.getElementById('nb_article').textContent = nb_product;
+    calculTotalPrice();
+}
 
-    let row = input.closest('tr');
-    let td_price = row.querySelector('[data-basket_price]');
+function basketRemoveProduct(product) {
     let basket = getBasket();
+    let product_index = getIndexProductInBasket(basket, product);
 
-    input.value = nb_items;
-    td_price.textContent = formatPrice(nb_items * parseInt(td_price.getAttribute('data-basket_price')));
+    basket.nb_products -= product.nb_product;
+    basket.products.splice(product_index, 1);
 
-    basket.products[input.getAttribute('data-index')].nb_product = nb_items;
-    basket.nb_products += diff;
-    localStorage.setItem('basket', JSON.stringify(basket));
+    saveBasket(basket);
+    return basket.nb_products;
+}
 
-    document.getElementById('nb_article').textContent = basket.nb_products;
+function deleteBasketRow(btn) {
+    let row = btn.closest('tr');
+    let product = defineProduct(row);
+    let nb_product = basketRemoveProduct(product);
+
+    row.remove();
+    document.getElementById('nb_article').textContent = nb_product;
+    addSuccessToast('Ce nounours a bien été supprimé :\'(');
     calculTotalPrice();
 }

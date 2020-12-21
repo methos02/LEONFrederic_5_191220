@@ -26,32 +26,41 @@
     <section class="div-basket">
         <table style="width:100%">
             <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Couleur</th>
-                    <th>Nombre</th>
-                    <th>Prix Total</th>
-                </tr>
+            <tr>
+                <td></td>
+                <th>Nom</th>
+                <th>Couleur</th>
+                <th>Nombre</th>
+                <th>Prix Total</th>
+            </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td data-basket_name></td>
-                    <td data-basket_color></td>
-                    <td>
-                         <span>
-                            <button data-update_basket="-1"> - </button>
-                            <input name="basket_numb" title="Nombre de produit">
-                            <button data-update_basket="+1"> + </button>
+            <tr>
+                <td class="product-row__delete" data-product_delete>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="20px" fill="#FF7171" viewBox="0 0 512 512" xml:space="preserve">
+                        <g>
+                            <path d="M432,96h-48V32c0-17.672-14.328-32-32-32H160c-17.672,0-32,14.328-32,32v64H80c-17.672,0-32,14.328-32,32v32h416v-32   C464,110.328,449.672,96,432,96z M192,96V64h128v32H192z"/>
+                            <path d="M80,480.004C80,497.676,94.324,512,111.996,512h288.012C417.676,512,432,497.676,432,480.008v-0.004V192H80V480.004z    M320,272c0-8.836,7.164-16,16-16s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z M240,272   c0-8.836,7.164-16,16-16s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z M160,272c0-8.836,7.164-16,16-16   s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z"/>
+                        </g>
+                    </svg>
+                </td>
+                <td data-product_name></td>
+                <td data-product_color></td>
+                <td>
+                         <span class="product-row__number">
+                            <button data-product_nb_update="-1"> - </button>
+                            <input name="product_numb" title="Nombre de produit">
+                            <button data-product_nb_update="+1"> + </button>
                         </span>
-                    </td>
-                    <td data-basket_price></td>
-                </tr>
+                </td>
+                <td data-product_price></td>
+            </tr>
             </tbody>
             <tfoot>
-                <tr>
-                    <td colspan="3"></td>
-                    <td data-total_price></td>
-                </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td data-total_price></td>
+            </tr>
             </tfoot>
 
         </table>
