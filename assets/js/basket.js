@@ -1,65 +1,64 @@
-let tbody = document.querySelector('tbody');
-let template = tbody.firstElementChild;
+function getBasket() {
+    let basket = localStorage.getItem('basket');
+    return basket !== null ? JSON.parse(basket) : {nb_products : 0, products: []};
+}
 
-document.addEventListener("DOMContentLoaded", () => {
-    hydrateBasket();
-    calculTotalPrice();
-});
+function getProductInBasket(basket, product_id) {
+    return basket.products.find((basket_product) => product_id === basket_product.id)
+}
 
-function hydrateBasket() {
+function getIndexProductInBasket(basket, product_id) {
+    return basket.products.findIndex((basket_product) => product_id === basket_product.id)
+}
+
+function basketAddOrUpdateProduct(product, infos) {
     let basket = getBasket();
-    basket.products.map((product, index) => insertRow(product, index));
+    let product_basket_index = getIndexProductInBasket(basket, product._id);
+
+    if(product_basket_index === -1) {
+        addSuccessToast('Votre nounours a bien été ajouté !');
+        return basketAddProduct(basket, defineProduct(product, infos));
+    }
+
+    addSuccessToast('Votre panier a été modifié !');
+    return basketUpdateProduct(basket, infos, product_basket_index);
 }
 
-function insertRow(product, index) {
-    let row = template.cloneNode(true);
-
-    row.setAttribute('data-index', index);
-    row.querySelector('[data-product_name]').textContent = product.name;
-    row.querySelector('[data-product_color]').textContent = product.color;
-    row.querySelector('input[name=product_numb]').value = product.nb_product;
-
-    let tr_price = row.querySelector('[data-product_price]');
-    tr_price.innerHTML = formatPrice(product.price * product.nb_product);
-    tr_price.setAttribute('data-product_price', product.price);
-
-    row.querySelectorAll('[data-product_nb_update]').forEach(function (btn) {
-        btn.addEventListener('click', function() { changeNumberItems(this); });
-    });
-
-    row.querySelectorAll('input[name=product_numb]').forEach(function (input) {
-        input.addEventListener('change', function() { updateBasket(this); });
-    });
-
-    row.querySelectorAll('[data-product_delete]').forEach(function (btn) {
-        btn.addEventListener('click', function() { deleteBasketRow(this); });
-    });
-
-    tbody.appendChild(row);
+function basketAddProduct(basket, product) {
+    basket.products.push(product);
+    return saveBasket(basket);
 }
 
-function calculTotalPrice() {
-    let total_price = 0;
-
-    document.querySelectorAll('[data-product_price]').forEach(function(td) {
-        let price = parseInt(td.textContent.slice(0, -2));
-
-        if( Number.isInteger(price) ) {
-            total_price += price;
-        }
-    });
-
-   document.querySelector('[data-total_price]').textContent = formatPrice(total_price * 100);
+function basketUpdateProduct(basket, infos, index) {
+    basket.products[index].colors = basketAddOrUpdateColor(basket.products[index], infos);
+    return saveBasket(basket);
 }
 
-function updateBasket(btn) {
-    let row = btn.closest('tr');
-    let product = defineProduct(row);
-    let nb_product = basketAddOrUpdateProduct(product);
+function saveBasket(basket) {
 
-    row.querySelector('[data-product_price]').textContent = product.total_price;
-    document.getElementById('nb_article').textContent = nb_product;
-    calculTotalPrice();
+    basket.nb_products = basket.products.reduce((nb_total, product) => {
+        const nb_product = product.colors.reduce((nb_product, info) => { return nb_product + parseInt(info.nb) }, 0);
+        return nb_total + nb_product
+    }, 0);
+
+    localStorage.setItem('basket', JSON.stringify(basket));
+    return basket.nb_products;
+}
+
+function basketNbProduct() {
+    return getBasket().nb_products;
+}
+
+function basketAddOrUpdateColor(product, infos) {
+    const infos_index = product.colors.findIndex(color => color.name === infos.name);
+
+    if(infos_index !== -1) {
+        product.colors[infos_index] = infos
+        return product.colors;
+    }
+
+    product.colors.push(infos);
+    return product.colors;
 }
 
 function basketRemoveProduct(product) {
