@@ -1,28 +1,23 @@
 const product_id = getIdProduct();
+let product_api;
 document.addEventListener("DOMContentLoaded", () => {
-    getProduct().then(product => {
+    product = getProduct(product_id).then(product => {
         insertProduct(product);
         updateWithBasket(product);
+        product_api = product;
     });
 
     document.getElementById('add-basket').addEventListener('click', () => clickAddProduct(document.getElementById('div-product')));
     document.getElementById('nb_product').addEventListener('change', () => updatePrice());
+    document.querySelector('[name=colors]').addEventListener('change', function() {initNbProduct(this)});
 });
-
-async function getProduct() {
-    const productJson = await fetch('http://localhost:3000/api/teddies/' + product_id);
-    return await productJson.json();
-}
 
 function insertProduct(product) {
     document.querySelector('[data-product_name]').textContent = product.name;
     document.querySelector('[data-product_image]').setAttribute('src', product.imageUrl);
     document.querySelector('[data-product_description]').textContent = product.description;
     document.querySelector('[data-product_colors]').innerHTML = generateColorOptions(product.colors);
-
-    const div_price = document.querySelector('[data-product_price]');
-    div_price.setAttribute('data-product_price', product.price);
-    div_price.textContent = formatPrice(product.price);
+    document.querySelector('[data-product_price]').textContent = formatPrice(product.price);
 
     document.querySelectorAll('[data-product_nb_update]').forEach(function (btn) {
         btn.addEventListener('click', function() { changeNumberItems(this); });
@@ -30,6 +25,17 @@ function insertProduct(product) {
 
     const div_product = document.getElementById('div-product');
     div_product.classList.add('visible');
+}
+
+function initNbProduct(input_color) {
+    let basket = getBasket();
+    let product = getProductInBasket(basket, getIdProduct());
+    let infos = productGetInfos(product, input_color.value);
+    let nb = returnOrInitInfos(infos, input_color.value).nb;
+
+    document.querySelector('[name=product_numb]').value = nb;
+    document.querySelector('[data-product_price]').textContent = formatPrice(product_api.price * nb);
+    updateBtnAdd(infos !== undefined ? 'update' : 'add');
 }
 
 function updateWithBasket(product) {
@@ -56,10 +62,10 @@ function getIdProduct() {
 }
 
 async function clickAddProduct() {
-    const product = await getProduct();
+    const product = await getProduct(product_id);
     const infos = {
         name: document.getElementById('colors').value,
-        nb: document.getElementById('nb_product').value,
+        nb: parseInt(document.getElementById('nb_product').value),
     }
 
     document.getElementById('nb_article').textContent = basketAddOrUpdateProduct(product, infos);
@@ -68,11 +74,9 @@ async function clickAddProduct() {
 
 function updatePrice() {
     let nb_product = document.getElementById('nb_product').value;
-    let price = document.querySelector('[data-product_price]').getAttribute('data-product_price');
-
-    document.querySelector('[data-product_price]').textContent = formatPrice(price * nb_product);
+    document.querySelector('[data-product_price]').textContent = formatPrice(product_api.price * nb_product);
 }
 
-function updateBtnAdd() {
-    document.getElementById('add-basket').textContent = 'Modifier le panier';
+function updateBtnAdd(etat) {
+    document.getElementById('add-basket').textContent = etat === 'update' ? 'Modifier le panier' : 'Ajouter au panier';
 }

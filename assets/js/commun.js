@@ -7,6 +7,11 @@ function formatPrice(price_cent) {
     return price.toLocaleString("fr-FR", {style: "currency", currency: "EUR"})
 }
 
+async function getProduct(product_id) {
+    const productJson = await fetch('http://localhost:3000/api/teddies/' + product_id);
+    return await productJson.json();
+}
+
 function defineProduct(product, infos) {
      return {
         id : product._id,

@@ -35,7 +35,6 @@ function basketUpdateProduct(basket, infos, index) {
 }
 
 function saveBasket(basket) {
-
     basket.nb_products = basket.products.reduce((nb_total, product) => {
         const nb_product = product.colors.reduce((nb_product, info) => { return nb_product + parseInt(info.nb) }, 0);
         return nb_total + nb_product
@@ -47,6 +46,12 @@ function saveBasket(basket) {
 
 function basketNbProduct() {
     return getBasket().nb_products;
+}
+
+function productGetInfos(product, color_name) {
+    if(product === undefined) return undefined;
+
+    return product.colors.find((color) => color.name === color_name);
 }
 
 function basketAddOrUpdateColor(product, infos) {
@@ -81,4 +86,13 @@ function deleteBasketRow(btn) {
     document.getElementById('nb_article').textContent = nb_product;
     addSuccessToast('Ce nounours a bien été supprimé :\'(');
     calculTotalPrice();
+}
+
+function returnOrInitInfos(infos, color_name) {
+    if(infos !== undefined) return infos;
+
+    return {
+        name: color_name,
+        nb: 1
+    }
 }

@@ -1,8 +1,5 @@
 .page__basket {
-  tbody>:first-child { display: none;}
-
   .product-row {
     &__delete { cursor: pointer; }
   }
-
 }
