@@ -1,10 +1,11 @@
 const product_id = getIdProduct();
 let product_api;
+
 document.addEventListener("DOMContentLoaded", () => {
-    product = getProduct(product_id).then(product => {
-        insertProduct(product);
-        updateWithBasket(product);
+    getProduct(product_id).then(product => {
         product_api = product;
+        insertProduct(product);
+        initNbProduct(document.querySelector('[name=colors]'));
     });
 
     document.getElementById('add-basket').addEventListener('click', () => clickAddProduct(document.getElementById('div-product')));
@@ -29,25 +30,13 @@ function insertProduct(product) {
 
 function initNbProduct(input_color) {
     let basket = getBasket();
-    let product = getProductInBasket(basket, getIdProduct());
-    let infos = productGetInfos(product, input_color.value);
+    let product_basket = getProductInBasket(basket, product_id);
+    let infos = productGetInfos(product_basket, input_color.value);
     let nb = returnOrInitInfos(infos, input_color.value).nb;
 
     document.querySelector('[name=product_numb]').value = nb;
     document.querySelector('[data-product_price]').textContent = formatPrice(product_api.price * nb);
     updateBtnAdd(infos !== undefined ? 'update' : 'add');
-}
-
-function updateWithBasket(product) {
-    let basket = getBasket();
-    let product_basket = getProductInBasket(basket, product._id);
-
-    if(product_basket !== undefined) {
-        let product_color = product_basket.colors.find(color => color.name === product.colors[0]);
-
-        document.querySelector('input[name=product_numb]').value = product_color !== undefined ? product_color.nb : 1;
-        updateBtnAdd()
-    }
 }
 
 function generateColorOptions(options) {

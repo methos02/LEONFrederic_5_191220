@@ -2,15 +2,15 @@ let tbody = document.querySelector('tbody');
 const products = {};
 
 document.addEventListener("DOMContentLoaded", () => {
-    insertProducts().then(() => calculTotalPrice());
+    insertProducts();
 });
 
-async function insertProducts() {
+function insertProducts() {
     let basket = getBasket();
 
-    basket.products.map(async function(produit) {
-        products[produit.id] = await getProduct(produit.id);
-        insertRow(products[produit.id], produit.colors)
+    basket.products.map(async (product) => {
+        products[product.id] = await getProduct(product.id);
+        insertRow(products[product.id], product.colors);
     });
 }
 
@@ -27,10 +27,11 @@ function insertRow(product, colors) {
         });
 
         row.querySelectorAll('[data-product_delete]').forEach(function (btn) {
-            btn.addEventListener('click', function() { deleteBasketRow(this); });
+            btn.addEventListener('click', function() { removeRowFromBasket(this); });
         });
 
         tbody.appendChild(row);
+        calculTotalPrice();
     });
 }
 
@@ -77,15 +78,20 @@ function updateBasket(btn) {
     calculTotalPrice();
 }
 
+function removeRowFromBasket(btn) {
+    let row = btn.closest('tr');
+    let color = row.querySelector('[data-color]').textContent;
+
+    document.getElementById('nb_article').textContent = localBasketRemoveProduct(product_id, color);
+    addSuccessToast('Ce nounours a bien été supprimé :\'(');
+    calculTotalPrice();
+}
+
 function calculTotalPrice() {
     let total_price = 0;
 
     document.querySelectorAll('[data-product_price]').forEach(function(td) {
-        let price = parseInt(td.textContent.slice(0, -2));
-
-        if( Number.isInteger(price) ) {
-            total_price += price;
-        }
+        total_price += parseInt(td.textContent.slice(0, -2));
     });
 
     document.querySelector('[data-total_price]').textContent = formatPrice(total_price * 100);

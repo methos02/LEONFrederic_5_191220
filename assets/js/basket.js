@@ -66,26 +66,17 @@ function basketAddOrUpdateColor(product, infos) {
     return product.colors;
 }
 
-function basketRemoveProduct(product) {
+function localBasketRemoveProduct(product_id, remove_color) {
     let basket = getBasket();
-    let product_index = getIndexProductInBasket(basket, product);
+    let product_index = getIndexProductInBasket(basket, product_id);
 
-    basket.nb_products -= product.nb_product;
-    basket.products.splice(product_index, 1);
+    if(basket[product_index].colors.length === 1) {
+        delete basket[product_index];
+        return saveBasket(basket);
+    }
 
-    saveBasket(basket);
-    return basket.nb_products;
-}
-
-function deleteBasketRow(btn) {
-    let row = btn.closest('tr');
-    let product = defineProduct(row);
-    let nb_product = basketRemoveProduct(product);
-
-    row.remove();
-    document.getElementById('nb_article').textContent = nb_product;
-    addSuccessToast('Ce nounours a bien été supprimé :\'(');
-    calculTotalPrice();
+    basket[product_index].colors = basket[product_index].colors.filter( color => color.name !== remove_color);
+    return saveBasket(basket);
 }
 
 function returnOrInitInfos(infos, color_name) {
