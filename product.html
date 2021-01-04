@@ -24,7 +24,7 @@
         <span id="nb_article"> 0 </span>
     </a>
 </nav>
-<div class="container page__product">
+<div class="container-custom page__product">
     <section class="div-product" id="div-product">
         <h1 data-product_name>Produit</h1>
         <div class="div-product__card" id="product-card">
@@ -41,9 +41,7 @@
                     <span>
                         <label for="nb_product">Nombre :</label>
                         <span class="product-row__number">
-                            <button data-product_nb_update="-1"> - </button>
-                            <input id="nb_product" name="product_numb" title="Nombre de produit" value="1">
-                            <button data-product_nb_update="+1"> + </button>
+                            <input id="nb_product" type="number" min="1" name="product_numb" title="Nombre de produit" value="1">
                         </span>
                     </span>
                     <span class="div-product__price" data-product_price></span>

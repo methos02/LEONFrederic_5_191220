@@ -15,7 +15,7 @@ function addErrorToast(message) {
 }
 
 function addToastContainer() {
-    let div_container = document.createElement('div');
+    const div_container = document.createElement('div');
     div_container.classList.add('container-toast');
     div_container.setAttribute('id', 'container-toast');
 
@@ -23,7 +23,7 @@ function addToastContainer() {
 }
 
 function addToast(message, type) {
-    let div_message = document.createElement('div');
+    const div_message = document.createElement('div');
     div_message.classList.add('toast', 'toast-' + type);
     div_message.innerHTML = '<span class="toast-btn" data-close="toast"> x </span><span>'  + message + '</span>';
 

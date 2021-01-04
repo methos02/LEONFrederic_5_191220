@@ -1,4 +1,5 @@
 const product_id = getIdProduct();
+const basket = getBasket();
 let product_api;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -12,6 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('nb_product').addEventListener('change', () => updatePrice());
     document.querySelector('[name=colors]').addEventListener('change', function() {initNbProduct(this)});
 });
+
+function getIdProduct() {
+    const url = new URL(location.href)
+    const params = new URLSearchParams(url.search);
+
+    return params.get('id');
+}
 
 function insertProduct(product) {
     document.querySelector('[data-product_name]').textContent = product.name;
@@ -28,41 +36,32 @@ function insertProduct(product) {
     div_product.classList.add('visible');
 }
 
-function initNbProduct(input_color) {
-    let basket = getBasket();
-    let product_basket = getProductInBasket(basket, product_id);
-    let infos = productGetInfos(product_basket, input_color.value);
-    let nb = returnOrInitInfos(infos, input_color.value).nb;
-
-    document.querySelector('[name=product_numb]').value = nb;
-    document.querySelector('[data-product_price]').textContent = formatPrice(product_api.price * nb);
-    updateBtnAdd(infos !== undefined ? 'update' : 'add');
-}
-
 function generateColorOptions(options) {
     return options.map((option) => '<option value="' + option + '" >' + option + '</option>').join();
 }
 
-function getIdProduct() {
-    let url = new URL(location.href)
-    let params = new URLSearchParams(url.search);
+function initNbProduct(input_color) {
+    const infos = productGetInfos(product_id, input_color.value);
+    const nb_product = infos !== undefined ? infos.nb : 1
 
-    return params.get('id');
+    document.querySelector('[name=product_numb]').value = nb_product;
+    document.querySelector('[data-product_price]').textContent = formatPrice(product_api.price * nb_product);
+    updateBtnAdd(infos !== undefined ? 'update' : 'add');
 }
 
-async function clickAddProduct() {
-    const product = await getProduct(product_id);
+function clickAddProduct() {
+    const nb_product = parseInt(document.getElementById('nb_product').value);
     const infos = {
         name: document.getElementById('colors').value,
-        nb: parseInt(document.getElementById('nb_product').value),
+        nb: nb_product,
     }
 
-    document.getElementById('nb_article').textContent = basketAddOrUpdateProduct(product, infos);
-    updateBtnAdd()
+    document.getElementById('nb_article').textContent = basketAddOrUpdateProduct(product_api, infos);
+    updateBtnAdd(nb_product === 1 ? 'add' : 'update');
 }
 
 function updatePrice() {
-    let nb_product = document.getElementById('nb_product').value;
+    const nb_product = document.getElementById('nb_product').value;
     document.querySelector('[data-product_price]').textContent = formatPrice(product_api.price * nb_product);
 }
 
