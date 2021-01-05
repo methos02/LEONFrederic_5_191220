@@ -1,3 +1,74 @@
 .page__index {
+  margin-top: 102px;
 
+  .div-load {
+    transition: opacity 300ms;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $primary;
+
+    h2 { font-family: 'Courgette', sans-serif; }
+
+    .cloud {
+      img {
+        position: absolute;
+        opacity: 0;
+        left: 10px;
+        top: 15px;
+        z-index: 2;
+        animation: load 2.1s infinite;
+      }
+
+      @for $i from 2 through 3 {
+        > :nth-child(#{$i}) {
+          animation-delay: #{($i - 1) * 700}ms;
+        }
+      }
+    }
+  }
+
+  h1 {
+    text-align: center;
+    color: #905cfb;
+    font-size: 64px;
+    margin: 25px;
+    font-family: 'Courgette', sans-serif;
+  }
+
+  .div-products.loaded {
+    .card-product { animation: show-load 500ms forwards;}
+
+    @for $i from 2 through 20 {
+      > :nth-child(#{$i}) {
+        animation-delay: #{($i - 1) * 50}ms;
+      }
+    }
+  }
+}
+
+@keyframes load {
+  0% {
+    transform: translateX(0);
+  }
+  10% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(169px);
+  }
+}
+
+@keyframes show-load {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }

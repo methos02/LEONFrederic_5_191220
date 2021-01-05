@@ -97,15 +97,22 @@ function setPatternError(input_name, error, event) {
 
 async function sendForm(e) {
     e.preventDefault();
-    console.log(e.target);
 
-    return;
-    let response = await fetch('/article/formdata/post/user', {
+     let response = await fetch('http://localhost:3000/api/teddies/order', {
         method: 'POST',
-        body: new FormData(e.target)
+        body: JSON.stringify({ contact : getFormDatas(e.target), product : basket.products })
     });
 
     let result = await response.json();
-
     alert(result.message);
+}
+
+function getFormDatas(form) {
+    const datas = {};
+
+    form.querySelectorAll('input').forEach((input) => {
+        datas[input.getAttribute('name')] = input.value;
+    });
+
+    return datas;
 }

@@ -3,6 +3,13 @@ function getBasket() {
     return basket !== null ? JSON.parse(basket) : {nb_products : 0, products: []};
 }
 
+function stringfyBasket() {
+    return  JSON.stringify(basket.products.map((product) => {
+        const colors = product.colors.map((color) => { return [color.nb, color.name]});
+        return [product.id, colors]
+    }));
+}
+
 function getProductInBasket(product_id) {
     return basket.products.find((basket_product) => product_id === basket_product.id)
 }
