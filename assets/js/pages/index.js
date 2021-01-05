@@ -1,6 +1,18 @@
-const div_products = document.getElementById('products');
+const div_products = document.getElementById('div-products');
 
 document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        const div_load = document.getElementById('div-load');
+        div_load.style.opacity = "0";
+
+        setTimeout(() => {
+            div_load.remove();
+            div_products.classList.add('loaded');
+            document.getElementsByTagName("body")[0].classList.remove('loading');
+        }, 300);
+
+    }, 3000);
+
     getProducts().then();
 });
 
@@ -8,7 +20,7 @@ async function getProducts() {
     const productsJson =  await fetch('http://localhost:3000/api/teddies');
     const products = await productsJson.json();
 
-    products.map(function(product) { insertProducts(product) })
+    await Promise.all( products.map(async function(product) { insertProducts(product) }) );
 }
 
 function insertProducts(product) {
