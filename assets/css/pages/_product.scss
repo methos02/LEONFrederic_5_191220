@@ -1,22 +1,56 @@
 .page__product {
   .div-product {
     display: none;
-
     &.visible {display: block;}
+
+    h1 {
+      font-family: "Courgette", sans-serif;
+      color: $secondary;
+      font-size: 50px;
+      text-align: center;
+      font-weight: bold;
+      margin: 40px 0
+    }
 
     &__card {
       display: flex;
-      align-items: start;
     }
 
-    img {width: 60vw;}
+    img {
+      border-radius: 10px;
+      box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+      width: 60vw;
+    }
 
     &__infos {
       margin-left: 30px;
-      background-color: white;
+      border-radius: 10px;
+      background-color: $primary;
       padding: 30px;
+      box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    }
 
-      > *:not(:last-child) {margin-bottom: 15px}
+    &__description { margin-bottom: 30px; }
+
+    input, select {
+      display: inline;
+      text-align: right;
+      padding: 5px;
+      height: auto;
+    }
+
+    .colors { width: 150px; }
+    .nb_product {
+      width: 50px;
+      margin-bottom: 15px;
+    }
+
+    &__price {
+      margin-top: 15px;
+      color: $secondary;
+      text-align: right;
+      font-weight: bold;
+      font-size: 20px;
     }
   }
 }

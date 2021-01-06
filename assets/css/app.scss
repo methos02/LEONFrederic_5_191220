@@ -1,4 +1,6 @@
 @import "./utils/variables";
+@import "./utils/fonts";
+@import "./utils/btns";
 
 @import "./layout/navbarre";
 @import "./layout/global";
@@ -11,3 +13,4 @@
 @import "./components/toast";
 @import "./components/cloud";
 @import "./components/badge_basket";
+@import "./components/animation_logo_basket";

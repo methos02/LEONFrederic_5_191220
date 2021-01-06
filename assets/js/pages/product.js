@@ -56,8 +56,19 @@ function clickAddProduct() {
         nb: nb_product,
     }
 
-    document.getElementById('nb_article').textContent = basketAddOrUpdateProduct(product_api, infos);
+    const nb_total_product = basketAddOrUpdateProduct(product_api, infos);
+
+    animate_logo_basket(nb_total_product);
     updateBtnAdd(nb_product === 1 ? 'add' : 'update');
+}
+
+function animate_logo_basket( nb_total_product) {
+    const logo_basket = document.getElementById('nb_article');
+
+    logo_basket.classList.add('update_nb');
+
+    setTimeout(() => { logo_basket.textContent = nb_total_product; }, 300);
+    setTimeout(() => { logo_basket.classList.remove('update_nb'); }, 600)
 }
 
 function updatePrice() {

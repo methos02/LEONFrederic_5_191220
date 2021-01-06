@@ -9,6 +9,7 @@ nav {
   padding: 1em 2em;
   background-color: $primary;
   box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+  z-index: 550;
 
   a {
     display: inline-block;
