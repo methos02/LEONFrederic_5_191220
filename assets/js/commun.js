@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById('nb_article').textContent = getBasket().nb_products;
+    const nb_product = getBasket().nb_products;
+    updateBadgeBasket(nb_product);
 });
 
 function formatPrice(price_cent) {
@@ -17,4 +18,13 @@ function defineProduct(product, infos) {
         id : product._id,
         colors: [infos]
     }
+}
+
+function animate_logo_basket( nb_total_product) {
+    const logo_basket = document.getElementById('nb_article');
+
+    logo_basket.classList.add('update_nb');
+
+    setTimeout(() => { updateBadgeBasket(nb_total_product) }, 300);
+    setTimeout(() => { logo_basket.classList.remove('update_nb'); }, 600)
 }

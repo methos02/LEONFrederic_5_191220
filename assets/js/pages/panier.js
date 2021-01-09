@@ -11,14 +11,26 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function insertProducts() {
-    await Promise.all(
-        basket.products.map(async (product) => {
-            products[product.id] = await getProduct(product.id);
-            insertRow(products[product.id], product.colors);
-        })
-    )
+    if( basket.products.length > 0 ) {
+        await Promise.all(
+            basket.products.map(async (product) => {
+                products[product.id] = await getProduct(product.id);
+                insertRow(products[product.id], product.colors);
+            })
+        )
+
+        return;
+    }
+
+    document.getElementById('page__basket-empty').style.display = 'flex';
+    document.getElementById('page__basket-table').style.display = 'none';
 }
 
+/**
+ *
+ * @param product
+ * @param colors
+ */
 function insertRow(product, colors) {
     const tbody = document.querySelector('tbody');
 
@@ -65,15 +77,16 @@ function updateBasket(input) {
     });
 
     row.querySelector('[data-product_price]').textContent = formatPrice(nb_product * products[product_id].price);
-    document.getElementById('nb_article').textContent = total_product;
+    animate_logo_basket(nb_product);
     calculTotalPrice();
 }
 
 function removeRowFromBasket(btn) {
     const row = btn.closest('tr');
     const color = row.querySelector('[data-color]').textContent;
+    const nb_product = localBasketRemoveProduct(product_id, color);
 
-    document.getElementById('nb_article').textContent = localBasketRemoveProduct(product_id, color);
+    updateBasket(nb_product);
     addSuccessToast('Ce nounours a bien été supprimé :\'(');
     calculTotalPrice();
 }
@@ -90,21 +103,29 @@ function calculTotalPrice() {
 
 function setPatternError(input_name, error, event) {
     const input = document.getElementById(input_name);
-    input.addEventListener(event, function () {
-        input.setCustomValidity(input.validity.patternMismatch ? error : "");
-    });
+    input.addEventListener(event, () => input.setCustomValidity(input.validity.patternMismatch ? error : ""));
 }
 
 async function sendForm(e) {
     e.preventDefault();
 
-     let response = await fetch('http://localhost:3000/api/teddies/order', {
+    const response = await fetch('http://localhost:3000/api/teddies/order', {
+        headers: new Headers({"Content-Type" : "application/json"}),
         method: 'POST',
-        body: JSON.stringify({ contact : getFormDatas(e.target), product : basket.products })
+        body: JSON.stringify({ contact : getFormDatas(e.target), products : basket.products.map( product => product.id) })
     });
 
-    let result = await response.json();
-    alert(result.message);
+    const result = await response.json();
+
+    document.getElementById('order_name').innerText = result.contact.firstName;
+    document.getElementById('order_number').innerText = result.orderId;
+    document.getElementById('order-success').style.display = 'block';
+    document.getElementById('order-form').style.display = 'none';
+
+    emptyBasket();
+    document.getElementById('page__basket-empty').style.display = 'flex';
+    document.getElementById('page__basket-table').style.display = 'none';
+
 }
 
 function getFormDatas(form) {

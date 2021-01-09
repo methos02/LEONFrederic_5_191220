@@ -3,11 +3,22 @@ function getBasket() {
     return basket !== null ? JSON.parse(basket) : {nb_products : 0, products: []};
 }
 
-function stringfyBasket() {
-    return  JSON.stringify(basket.products.map((product) => {
-        const colors = product.colors.map((color) => { return [color.nb, color.name]});
-        return [product.id, colors]
-    }));
+function emptyBasket() {
+    localStorage.clear();
+    updateBadgeBasket(0);
+}
+
+function updateBadgeBasket (nb_product) {
+    const badge = document.getElementById("nb_article");
+
+    if(parseInt(nb_product) === 0) {
+        badge.innerText = "";
+        badge.classList.add('empty-basket');
+        return;
+    }
+
+    badge.innerText = nb_product;
+    badge.classList.remove('empty-basket');
 }
 
 function getProductInBasket(product_id) {
