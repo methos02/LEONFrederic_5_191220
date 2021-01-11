@@ -1,33 +1,17 @@
 .page__index {
-  .div-load {
-    transition: opacity 300ms;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: $primary;
+  .cloud {
+    img {
+      position: absolute;
+      opacity: 0;
+      left: 10px;
+      top: 15px;
+      z-index: 2;
+      animation: load 2.1s infinite;
+    }
 
-    h2 { font-family: 'Courgette', sans-serif; }
-
-    .cloud {
-      img {
-        position: absolute;
-        opacity: 0;
-        left: 10px;
-        top: 15px;
-        z-index: 2;
-        animation: load 2.1s infinite;
-      }
-
-      @for $i from 2 through 3 {
-        > :nth-child(#{$i}) {
-          animation-delay: #{($i - 1) * 700}ms;
-        }
+    @for $i from 2 through 3 {
+      > :nth-child(#{$i}) {
+        animation-delay: #{($i - 1) * 700}ms;
       }
     }
   }

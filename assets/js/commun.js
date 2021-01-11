@@ -25,6 +25,31 @@ function animate_logo_basket( nb_total_product) {
 
     logo_basket.classList.add('update_nb');
 
-    setTimeout(() => { updateBadgeBasket(nb_total_product) }, 300);
-    setTimeout(() => { logo_basket.classList.remove('update_nb'); }, 600)
+    setTimeout(() =>  updateBadgeBasket(nb_total_product), 300);
+    setTimeout(() =>  logo_basket.classList.remove('update_nb'), 600);
+}
+
+function switchElementById(selectorIn, selectorOut) {
+    const elemIn = document.getElementById(selectorIn);
+    const elemOut = document.getElementById(selectorOut);
+    const halfDuration = 150;
+
+    elemOut.style.transition = 'opacity ' +  halfDuration + 'ms ease';
+    elemIn.style.transition = 'opacity ' +  (halfDuration + 50 ) + 'ms ease';
+    elemOut.style.opacity = "0";
+    elemIn.style.opacity = "0";
+
+
+    setTimeout(() => {
+        elemOut.classList.add('hide');
+        elemIn.classList.remove('hide');
+        }, halfDuration
+    );
+
+    setTimeout(() => elemIn.style.opacity = "1", halfDuration + 5);
+
+    setTimeout(() => {
+        elemIn.removeAttribute('style');
+        elemOut.removeAttribute('style');
+    },halfDuration * 2.5);
 }

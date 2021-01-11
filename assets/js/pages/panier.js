@@ -77,7 +77,7 @@ function updateBasket(input) {
     });
 
     row.querySelector('[data-product_price]').textContent = formatPrice(nb_product * products[product_id].price);
-    animate_logo_basket(nb_product);
+    animate_logo_basket(total_product);
     calculTotalPrice();
 }
 
@@ -119,13 +119,10 @@ async function sendForm(e) {
 
     document.getElementById('order_name').innerText = result.contact.firstName;
     document.getElementById('order_number').innerText = result.orderId;
-    document.getElementById('order-success').style.display = 'block';
-    document.getElementById('order-form').style.display = 'none';
 
-    emptyBasket();
-    document.getElementById('page__basket-empty').style.display = 'flex';
-    document.getElementById('page__basket-table').style.display = 'none';
-
+    //emptyBasket();
+    switchElementById('order-success', 'order-form');
+    switchElementById('page__basket-empty', 'page__basket-table')
 }
 
 function getFormDatas(form) {

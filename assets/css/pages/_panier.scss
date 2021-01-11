@@ -11,7 +11,7 @@
   }
 
   &-empty {
-    display: none;
+    display: flex;
     text-align: center;
     flex-direction: column;
     align-items: center;
@@ -20,7 +20,6 @@
   }
 
   .order-success {
-    display: none;
     position: relative;
     padding-bottom: 20px;
     margin: 15px;

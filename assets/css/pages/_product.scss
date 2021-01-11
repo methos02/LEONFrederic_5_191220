@@ -53,4 +53,50 @@
       font-size: 20px;
     }
   }
+
+  .div-load {
+    .div-load__animation {position: relative}
+    .animation_head {position: absolute}
+    .honey { position: relative; }
+
+    .head_down {
+      top: 200px;
+      left: 0;
+      animation: head_down 3000ms infinite;
+    }
+
+    .head_up {
+      left: 65px;
+      top: 90px;
+      animation: head_up 3000ms infinite;
+    }
+
+    .head_side {
+      right: 65px;
+      top: 90px;
+      animation: head_side 3000ms infinite;
+    }
+
+    @keyframes head_down {
+      0% { left: 0; }
+      25% { left: -75px; }
+      33% { left: 0; }
+      100% { left: 0; }
+    }
+
+    @keyframes head_side {
+      0% { right: 65px; }
+      33% { right: 65px; }
+      58% { right: -23px; }
+      66% { right: 65px; }
+      100% { right: 65px; }
+    }
+
+    @keyframes head_up {
+      0% { top: 90px; }
+      66% { top: 90px; }
+      92% { top: 10px; }
+      100% { top: 90px; }
+    }
+  }
 }

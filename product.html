@@ -16,7 +16,7 @@
     <script src="assets/js/basket.js" defer></script>
     <script src="assets/js/pages/product.js" defer></script>
 </head>
-<body>
+<body class="loading">
 <nav>
     <a href="index.html"><img src="assets/images/logo.png" alt="logo du site"></a>
     <a href="panier.html">
@@ -25,6 +25,16 @@
     </a>
 </nav>
 <div class="container-custom page__product">
+    <section class="div-load" id="div-load">
+        <div class="div-load__animation">
+            <img src="assets/images/ours_head_down.png" class="animation_head head_down" alt="Pot de miel">
+            <img src="assets/images/ours_head_up.png" class="animation_head head_up" alt="Pot de miel">
+            <img src="assets/images/ours_head_side.png" class="animation_head head_side" alt="Pot de miel">
+            <img src="assets/images/honey-lg.png" class="honey" alt="Image de pôt de miel">
+        </div>
+
+        <h2> Chargement en cours </h2>
+    </section>
     <section class="div-product" id="div-product">
         <div class="div-product__card" id="product-card">
             <img src="/assets/images/blank.png" alt="image du produit" data-product_image>

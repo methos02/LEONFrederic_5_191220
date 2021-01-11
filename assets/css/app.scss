@@ -5,7 +5,7 @@
 @import "./layout/navbarre";
 @import "./layout/global";
 
-@import "./pages/basket";
+@import "./pages/panier";
 @import "./pages/index";
 @import "./pages/product";
 
@@ -13,4 +13,6 @@
 @import "./components/toast";
 @import "./components/cloud";
 @import "./components/badge_basket";
-@import "./components/animation_logo_basket";
+@import "./components/div_load";
+
+@import "./animation/logo_basket";
