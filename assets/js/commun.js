@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const nb_product = getBasket().nb_products;
     updateBadgeBasket(nb_product);
+    loadPage();
 });
 
 function formatPrice(price_cent) {
@@ -13,11 +14,15 @@ async function getProduct(product_id) {
     return await productJson.json();
 }
 
-function defineProduct(product, infos) {
-     return {
-        id : product._id,
-        colors: [infos]
-    }
+function loadPage() {
+    setTimeout(() => {
+        const div_load = document.getElementById('div-load');
+
+        document.getElementsByTagName("body")[0].classList.remove('loading');
+        div_load.style.opacity = "0";
+
+        setTimeout(() => div_load.remove(), 300);
+    }, 3000);
 }
 
 function animate_logo_basket( nb_total_product) {

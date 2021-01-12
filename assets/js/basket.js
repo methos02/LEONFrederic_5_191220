@@ -34,7 +34,7 @@ function basketAddOrUpdateProduct(product, infos) {
 
     if(product_basket_index === -1) {
         addSuccessToast('Votre nounours a bien été ajouté !');
-        return basketAddProduct(defineProduct(product, infos));
+        return basketAddProduct({ id : product._id, colors: [infos] });
     }
 
     addSuccessToast('Votre panier a été modifié !');

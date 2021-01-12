@@ -1,11 +1,4 @@
 .page__basket {
-  h1, h2 {
-    color: #905cfb;
-    font-size: 64px;
-    margin: 25px;
-    font-family: 'Courgette', sans-serif;
-  }
-
   .product-row {
     &__delete { cursor: pointer; }
   }
@@ -36,6 +29,36 @@
       bottom: 0;
       right: 15px;
       font-size: initial;
+    }
+  }
+
+  .div-load {
+    .honey-note {
+      position: absolute;
+      height: 30px;
+      top: 55px;
+      left: 40px;
+      opacity: 0;
+      animation: honey-note 1500ms infinite;
+    }
+
+    @for $i from 2 through 20 {
+      img:nth-child(#{$i}) {
+        animation-delay: #{($i - 1) * 750}ms;
+      }
+    }
+  }
+
+  @keyframes honey-note {
+    10% {opacity: 1;}
+    12.5% { transform: translateY(20px);}
+    37.5% { transform: translateY(-20px);}
+    62.5% { transform: translateY(20px);}
+    75% {opacity: 1;}
+    87.5% { transform: translateY(-20px);}
+    100% {
+      top: 20px;
+      left: 170px;
     }
   }
 }

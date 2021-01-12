@@ -1,18 +1,6 @@
 const div_products = document.getElementById('div-products');
 
 document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(() => {
-        const div_load = document.getElementById('div-load');
-        div_load.style.opacity = "0";
-
-        setTimeout(() => {
-            div_load.remove();
-            div_products.classList.add('loaded');
-            document.getElementsByTagName("body")[0].classList.remove('loading');
-        }, 300);
-
-    }, 3000);
-
     getProducts().then();
 });
 

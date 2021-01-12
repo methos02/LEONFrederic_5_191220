@@ -28,10 +28,6 @@ function insertProduct(product) {
     document.querySelector('[data-product_colors]').innerHTML = generateColorOptions(product.colors);
     document.querySelector('[data-product_price]').textContent = formatPrice(product.price);
 
-    document.querySelectorAll('[data-product_nb_update]').forEach(function (btn) {
-        btn.addEventListener('click', function() { changeNumberItems(this); });
-    });
-
     const div_product = document.getElementById('div-product');
     div_product.classList.add('visible');
 }
@@ -59,7 +55,7 @@ function clickAddProduct() {
     const nb_total_product = basketAddOrUpdateProduct(product_api, infos);
 
     animate_logo_basket(nb_total_product);
-    updateBtnAdd(nb_product === 1 ? 'add' : 'update');
+    updateBtnAdd('update');
 }
 
 function updatePrice() {

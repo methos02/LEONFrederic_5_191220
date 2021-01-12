@@ -9,9 +9,14 @@
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 1;
   background-color: $primary;
 
   h2 {
     font-family: 'Courgette', sans-serif;
+  }
+
+  .div-load__animation {
+    position: relative;
   }
 }
