@@ -56,8 +56,8 @@ function saveBasket() {
         const nb_product = product.colors.reduce((nb_product, info) => { return nb_product + parseInt(info.nb) }, 0);
         return nb_total + nb_product
     }, 0);
-
-    localStorage.setItem('basket', JSON.stringify(basket));
+    console.log(basket)
+    //localStorage.setItem('basket', JSON.stringify(basket));
     return basket.nb_products;
 }
 
@@ -83,12 +83,13 @@ function basketAddOrUpdateColor(product, infos) {
 
 function localBasketRemoveProduct(product_id, remove_color) {
     const product_index = getIndexProductInBasket(product_id);
+    const product = basket.products[product_index];
 
-    if(basket[product_index].colors.length === 1) {
-        delete basket[product_index];
+    if(product.colors.length === 1) {
+        basket.products = basket.products.filter( product_basket => product_basket.id !== product_id);
         return saveBasket(basket);
     }
 
-    basket[product_index].colors = basket[product_index].colors.filter( color => color.name !== remove_color);
+    product.colors = product.colors.filter( color => color.name !== remove_color);
     return saveBasket(basket);
 }

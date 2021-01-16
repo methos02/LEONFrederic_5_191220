@@ -10,8 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.getElementById('add-basket').addEventListener('click', () => clickAddProduct(document.getElementById('div-product')));
-    document.getElementById('nb_product').addEventListener('change', () => updatePrice());
     document.querySelector('[name=colors]').addEventListener('change', function() {initNbProduct(this)});
+
+    const nb_product = document.getElementById('nb_product');
+    nb_product.addEventListener('change', () => updatePrice());
+    nb_product.addEventListener('input', function() { if( !this.reportValidity()) this.value = 1 });
 });
 
 function getIdProduct() {
@@ -47,6 +50,8 @@ function initNbProduct(input_color) {
 
 function clickAddProduct() {
     const nb_product = parseInt(document.getElementById('nb_product').value);
+    if(nb_product < 1) return;
+
     const infos = {
         name: document.getElementById('colors').value,
         nb: nb_product,

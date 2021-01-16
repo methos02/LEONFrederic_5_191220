@@ -26,38 +26,41 @@
         <span class="badge_basket empty-basket" id="nb_article"> 0 </span>
     </a>
 </nav>
-<div class="container-custom page__basket">
-    <section class="div-load" id="div-load">
+<div class="container-custom page-panier">
+    <section class="div-load" id="div-load" style="display: none">
         <div class="div-load__animation">
             <img src="assets/images/honey-note.png" class="honey-note" alt="Note pot de miel">
             <img src="assets/images/honey-note.png" class="honey-note" alt="Note pot de miel">
-            <img src="assets/images/ours_singer.png" class="honey" alt="Image de pôt de miel">
+            <img src="assets/images/ours_singer.png" class="honey" alt="Image de l'ours qui chante">
         </div>
         <h2> Chargement en cours </h2>
     </section>
-    <section class="page__basket-table" id="page__basket-table">
-        <h1 class="title">Votre panier</h1>
-        <table style="width:100%">
-            <thead>
-            <tr>
-                <td></td>
-                <th>Nom</th>
-                <th>Couleur</th>
-                <th>Nombre</th>
-                <th>Prix Total</th>
-            </tr>
-            </thead>
-            <tbody></tbody>
-            <tfoot>
-            <tr>
-                <td colspan="4"></td>
-                <td data-total_price></td>
-            </tr>
-            </tfoot>
-        </table>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modal-order"> Passer commande </button>
+    <section class="panier-table" id="panier-table">
+        <div class="panier-table__card">
+            <h1 class="title">Votre panier</h1>
+            <table class="panier-table__table">
+                <thead>
+                <tr>
+                    <td></td>
+                    <th>Nom</th>
+                    <th>Couleur</th>
+                    <th class="product-row__number">Nombre</th>
+                    <th class="product-row__number">Prix Total</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="2"></td>
+                    <td class="panier-table__table-footer" colspan="2"> Facture Totale</td>
+                    <td class="product-row__number" data-total_price></td>
+                </tr>
+                </tfoot>
+            </table>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#modal-order"> Passer commande </button>
+        </div>
     </section>
-    <section class="page__basket-empty hide" id="page__basket-empty">
+    <section class="panier-empty hide" id="panier-empty">
         <img src="assets/images/ours_angry.png" alt="icone de success">
         <h2 class="title"> Votre panier est vide! </h2>
     </section>

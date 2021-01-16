@@ -1,9 +1,47 @@
-.page__basket {
-  .product-row {
-    &__delete { cursor: pointer; }
+.page-panier {
+  margin-top: 30px;
+
+  .panier-table {
+    .title { margin-top: 0;}
+
+    &__card {
+      width: 60vw;
+      margin: auto;
+      background-color: $primary;
+      box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+      border-radius: 5px;
+      padding: 2.5rem;
+    }
+
+    &__table { width: 100%;}
+
+    .product-row {
+      transition: font-size 150ms ;
+      img, input {transition: height 150ms;}
+
+      &__delete {
+        width: 50px;
+        cursor: pointer;
+      }
+      &__color { width: 120px; }
+      &__price, &__number {
+        width: 100px;
+        text-align: center;
+
+        input {width: 55px}
+      }
+    }
+
+    tfoot {font-weight: bold}
+    .panier-table__table-footer { text-align: right;}
+
+    .product-row.remove-row {
+      font-size: 0;
+      img, input {height: 0;}
+    }
   }
 
-  &-empty {
+  .panier-empty {
     display: flex;
     text-align: center;
     flex-direction: column;

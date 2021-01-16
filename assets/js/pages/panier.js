@@ -22,8 +22,7 @@ async function insertProducts() {
         return;
     }
 
-    document.getElementById('page__basket-empty').style.display = 'flex';
-    document.getElementById('page__basket-table').style.display = 'none';
+    switchElementById('panier-empty', 'panier-table')
 }
 
 /**
@@ -39,6 +38,7 @@ function insertRow(product, colors) {
 
         row.querySelectorAll('input[name=product_numb]').forEach(function (input) {
             input.addEventListener('change', function() { updateBasket(this); });
+            input.addEventListener('input', () => { if( !input.reportValidity()) input.value = 1 });
         });
 
         row.querySelectorAll('[data-product_delete]').forEach(function (btn) {
@@ -52,12 +52,13 @@ function insertRow(product, colors) {
 function generateRow(product, color) {
     const tr = document.createElement('tr');
     tr.setAttribute('data-product_id', product._id);
+    tr.classList.add('product-row');
 
     tr.innerHTML += '<td class="product-row__delete" data-product_delete><img src="/assets/images/trash.svg" alt="icone de poubelle"></td>';
-    tr.innerHTML += '<td>' + product.name + '</td>';
-    tr.innerHTML += '<td data-product_color>' + color.name + '</td>';
-    tr.innerHTML += '<input name="product_numb" type="number" min="1" title="Nombre de produit" value="' + color.nb + '">';
-    tr.innerHTML += '<td data-product_price>' + formatPrice(color.nb * product.price) + '</td>';
+    tr.innerHTML += '<td class="product-row__name">' + product.name + '</td>';
+    tr.innerHTML += '<td class="product-row__color" data-product_color>' + color.name + '</td>';
+    tr.innerHTML += '<td class="product-row__number"><input name="product_numb" type="number" pattern="\\d+" min="1" title="Nombre de produit" value="' + color.nb + '"></td>';
+    tr.innerHTML += '<td class="product-row__price" data-product_price>' + formatPrice(color.nb * product.price) + '</td>';
 
     return tr;
 }
@@ -83,11 +84,15 @@ function updateBasket(input) {
 
 function removeRowFromBasket(btn) {
     const row = btn.closest('tr');
-    const color = row.querySelector('[data-color]').textContent;
+    const color = row.querySelector('[data-product_color]').textContent;
+    const product_id = row.getAttribute('data-product_id');
     const nb_product = localBasketRemoveProduct(product_id, color);
 
-    updateBasket(nb_product);
+    row.classList.add('remove-row');
+    setTimeout(() => row.remove(), 150);
+
     addSuccessToast('Ce nounours a bien été supprimé :\'(');
+    animate_logo_basket(nb_product);
     calculTotalPrice();
 }
 
@@ -120,9 +125,9 @@ async function sendForm(e) {
     document.getElementById('order_name').innerText = result.contact.firstName;
     document.getElementById('order_number').innerText = result.orderId;
 
-    //emptyBasket();
+    emptyBasket();
     switchElementById('order-success', 'order-form');
-    switchElementById('page__basket-empty', 'page__basket-table')
+    switchElementById('panier-empty', 'panier-table')
 }
 
 function getFormDatas(form) {
