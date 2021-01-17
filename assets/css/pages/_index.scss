@@ -18,11 +18,8 @@
 
   h1 {
     text-align: center;
-
     @media (max-width: $sm) { font-size: 32px;  }
   }
-
-
 
   .div-products {
     display: flex;
@@ -75,13 +72,20 @@
       }
     }
 
-    .card-product { }
-
     @for $i from 2 through 20 {
       > :nth-child(#{$i}) {
         animation-delay: #{($i - 1) * 50}ms;
       }
     }
+  }
+
+  .modal-success {
+    .title {
+      flex: 1;
+      text-align: center;
+    }
+
+    .modal-body { text-align: center; }
   }
 }
 

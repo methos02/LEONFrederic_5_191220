@@ -4,7 +4,7 @@ function getBasket() {
 }
 
 function emptyBasket() {
-    localStorage.clear();
+    localStorage.removeItem('basket');
     updateBadgeBasket(0);
 }
 
@@ -56,8 +56,8 @@ function saveBasket() {
         const nb_product = product.colors.reduce((nb_product, info) => { return nb_product + parseInt(info.nb) }, 0);
         return nb_total + nb_product
     }, 0);
-    console.log(basket)
-    //localStorage.setItem('basket', JSON.stringify(basket));
+
+    localStorage.setItem('basket', JSON.stringify(basket));
     return basket.nb_products;
 }
 

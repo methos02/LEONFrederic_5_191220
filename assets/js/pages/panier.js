@@ -91,7 +91,7 @@ function removeRowFromBasket(btn) {
     row.classList.add('remove-row');
     setTimeout(() => row.remove(), 150);
 
-    addSuccessToast('Ce nounours a bien été supprimé :\'(');
+    addSuccessToast('Ce nounours a bien été supprimé <img src="/assets/images/ours_head_sade.png" alt="Tête de nounours triste">');
     animate_logo_basket(nb_product);
     calculTotalPrice();
 }
@@ -122,12 +122,10 @@ async function sendForm(e) {
 
     const result = await response.json();
 
-    document.getElementById('order_name').innerText = result.contact.firstName;
-    document.getElementById('order_number').innerText = result.orderId;
-
+    localStorage.setItem('order', result.orderId);
+    localStorage.setItem('name', result.contact.firstName);
     emptyBasket();
-    switchElementById('order-success', 'order-form');
-    switchElementById('panier-empty', 'panier-table')
+    window.location.replace("/index.html");
 }
 
 function getFormDatas(form) {

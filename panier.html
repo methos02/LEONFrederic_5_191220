@@ -27,7 +27,7 @@
     </a>
 </nav>
 <div class="container-custom page-panier">
-    <section class="div-load" id="div-load" style="display: none">
+    <section class="div-load" id="div-load">
         <div class="div-load__animation">
             <img src="assets/images/honey-note.png" class="honey-note" alt="Note pot de miel">
             <img src="assets/images/honey-note.png" class="honey-note" alt="Note pot de miel">
@@ -41,7 +41,7 @@
             <table class="panier-table__table">
                 <thead>
                 <tr>
-                    <td></td>
+                    <th></th>
                     <th>Nom</th>
                     <th>Couleur</th>
                     <th class="product-row__number">Nombre</th>
@@ -64,7 +64,7 @@
         <img src="assets/images/ours_angry.png" alt="icone de success">
         <h2 class="title"> Votre panier est vide! </h2>
     </section>
-    <div class="modal fade" id="modal-order" tabindex="-1">
+    <section class="modal fade" id="modal-order" tabindex="-1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -113,16 +113,10 @@
                             </div>
                         </form>
                     </div>
-                    <div class="order-success hide" id="order-success">
-                        <h2 class="title"> Merci <span id="order_name"></span>!</h2>
-                        <img src="assets/images/ours_happy.png" alt="icone de success">
-                        <p>Votre commande a bien été enregistrée.</p>
-                        <span class="order-success__span-number">Numéro de commande : <span id="order_number"></span></span>
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </div>
 </body>
 </html>

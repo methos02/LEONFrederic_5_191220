@@ -2,6 +2,8 @@ const div_products = document.getElementById('div-products');
 
 document.addEventListener("DOMContentLoaded", () => {
     getProducts().then();
+
+    if( localStorage.getItem('order') !== null ) { showSuccessModal();}
 });
 
 async function getProducts() {
@@ -26,4 +28,14 @@ function insertProducts(product) {
 
     card.appendChild(infos);
     div_products.appendChild(card);
+}
+
+function showSuccessModal() {
+    document.getElementById('order_name').innerText = localStorage.getItem('name');
+    document.getElementById('order_number').innerText = localStorage.getItem('order');
+
+    setTimeout(() => $('#modal-success').modal('show'), 3000);
+
+    localStorage.removeItem('name');
+    localStorage.removeItem('order');
 }

@@ -13,15 +13,24 @@
       padding: 2.5rem;
     }
 
-    &__table { width: 100%;}
+    &__table {
+      width: 100%;
+
+      thead th, tfoot td { padding: 10px 0; }
+
+      tbody tr:nth-child(even) { background-color: darken($primary, 3%); }
+      tbody tr:nth-child(odd) { background-color: lighten($primary, 4%); }
+    }
 
     .product-row {
       transition: font-size 150ms ;
       img, input {transition: height 150ms;}
 
       &__delete {
+        text-align: center;
         width: 50px;
         cursor: pointer;
+        line-height: 10px;
       }
       &__color { width: 120px; }
       &__price, &__number {
