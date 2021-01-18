@@ -2,7 +2,7 @@ const products = {};
 const basket = getBasket();
 
 document.addEventListener("DOMContentLoaded", () => {
-    insertProducts().then(() => calculTotalPrice());
+    getProducts().then(() => calculTotalPrice()).catch((error) => insertDivError(error));
 
     setPatternError('zip', "Le code postale doit être composé de 5 chiffres.", "input");
     setPatternError('email', "L'adresse mail est invalide.", "focusout");
@@ -10,7 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('formOrder').addEventListener('submit', function(e) {sendForm(e);});
 });
 
-async function insertProducts() {
+/**
+ * Get products from API
+ * @returns {Promise<void>}
+ */
+async function getProducts() {
     if( basket.products.length > 0 ) {
         await Promise.all(
             basket.products.map(async (product) => {
@@ -18,15 +22,17 @@ async function insertProducts() {
                 insertRow(products[product.id], product.colors);
             })
         )
-
+        loadPage('panier-table__body');
         return;
     }
 
-    switchElementById('panier-empty', 'panier-table')
+    document.getElementById('panier-empty').classList.remove('hide');
+    document.getElementById('panier-table').classList.add('hide');
+    loadPage('panier-empty');
 }
 
 /**
- *
+ * Insert product in basket table
  * @param product
  * @param colors
  */
@@ -49,20 +55,30 @@ function insertRow(product, colors) {
     });
 }
 
+/**
+ * Generate row product for basket table
+ * @param product
+ * @param color
+ * @returns {HTMLTableRowElement}
+ */
 function generateRow(product, color) {
     const tr = document.createElement('tr');
     tr.setAttribute('data-product_id', product._id);
     tr.classList.add('product-row');
 
     tr.innerHTML += '<td class="product-row__delete" data-product_delete><img src="/assets/images/trash.svg" alt="icone de poubelle"></td>';
-    tr.innerHTML += '<td class="product-row__name">' + product.name + '</td>';
-    tr.innerHTML += '<td class="product-row__color" data-product_color>' + color.name + '</td>';
+    tr.innerHTML += '<td class="product-row__name"><a href="/product.html?id=' + product._id + '&color=' + color.name + '">' + product.name + '</a></td>';
+    tr.innerHTML += '<td class="product-row__color" data-product_color><a href="/product.html?id=' + product._id + '&color=' + color.name + '">' + color.name + '</a></td>';
     tr.innerHTML += '<td class="product-row__number"><input name="product_numb" type="number" pattern="\\d+" min="1" title="Nombre de produit" value="' + color.nb + '"></td>';
     tr.innerHTML += '<td class="product-row__price" data-product_price>' + formatPrice(color.nb * product.price) + '</td>';
 
     return tr;
 }
 
+/**
+ * Update numb product in basket when click on numb input
+ * @param input
+ */
 function updateBasket(input) {
     const row = input.closest('tr');
     const product_id = row.getAttribute('data-product_id');
@@ -82,6 +98,10 @@ function updateBasket(input) {
     calculTotalPrice();
 }
 
+/**
+ * Remove product from basket when click on trash icon
+ * @param btn
+ */
 function removeRowFromBasket(btn) {
     const row = btn.closest('tr');
     const color = row.querySelector('[data-product_color]').textContent;
@@ -93,9 +113,14 @@ function removeRowFromBasket(btn) {
 
     addSuccessToast('Ce nounours a bien été supprimé <img src="/assets/images/ours_head_sade.png" alt="Tête de nounours triste">');
     animate_logo_basket(nb_product);
-    calculTotalPrice();
+
+    if(nb_product !== 0) {  calculTotalPrice(); return; }
+    switchElementById('panier-empty', 'panier-table');
 }
 
+/**
+ * Calculate the basket's total price
+ */
 function calculTotalPrice() {
     const total_price = basket.products.reduce((current_price, product_basket) => {
         const nb_product = product_basket.colors.reduce((current_nb, color) => parseInt(color.nb) + current_nb , 0);
@@ -105,12 +130,11 @@ function calculTotalPrice() {
     document.querySelector('[data-total_price]').textContent = formatPrice(total_price);
 }
 
-
-function setPatternError(input_name, error, event) {
-    const input = document.getElementById(input_name);
-    input.addEventListener(event, () => input.setCustomValidity(input.validity.patternMismatch ? error : ""));
-}
-
+/**
+ * Process after submit order
+ * @param e
+ * @returns {Promise<void>}
+ */
 async function sendForm(e) {
     e.preventDefault();
 
@@ -128,6 +152,11 @@ async function sendForm(e) {
     window.location.replace("/index.html");
 }
 
+/**
+ * Get order's form inputs values
+ * @param form
+ * @returns {{}}
+ */
 function getFormDatas(form) {
     const datas = {};
 
