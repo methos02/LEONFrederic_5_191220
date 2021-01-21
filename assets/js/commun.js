@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+    window.onunload = function(){ window.scrollTo(0,0); }
     const nb_product = getBasket().nb_products;
     updateBadgeBasket(nb_product);
+    insertFooterYear();
 });
 
 /**
@@ -112,4 +114,11 @@ function insertDivError(error) {
     div.innerHTML += '<p> Nous n\'avons pas réussi a récupérer les produits. </p>';
 
     document.querySelector('.container-custom').appendChild(div);
+}
+
+/**
+ * insert the current year in the footer
+ */
+function insertFooterYear() {
+    document.getElementById('copyright-year').innerText = new Date().getFullYear().toString();
 }

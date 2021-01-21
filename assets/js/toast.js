@@ -1,3 +1,5 @@
+let container_toast = 0;
+
 /**
  * generate and insert toast's container in the body
  */
@@ -7,6 +9,7 @@ function addToastContainer() {
     div_container.setAttribute('id', 'container-toast');
 
     document.body.appendChild(div_container);
+    container_toast = 1;
 }
 
 /**
@@ -31,9 +34,7 @@ function addErrorToast(message) {
  * @param type
  */
 function addToast(message, type) {
-    if(document.getElementById('#container-toast') == null) {
-        addToastContainer();
-    }
+    if(container_toast === 0) { addToastContainer(); }
 
     const div_message = document.createElement('div');
     div_message.classList.add('toast', 'toast-' + type);
@@ -44,7 +45,7 @@ function addToast(message, type) {
     document.getElementById('container-toast').appendChild(div_message);
     div_message.classList.add('add-toast');
 
-    setTimeout(() => closeToast(div_message.querySelector('[data-close]')), 3500);
+    setTimeout(() => closeToast(div_message.querySelector('[data-close]')), 3000);
 }
 
 /**
@@ -69,6 +70,8 @@ function generateTimer() {
 function closeToast(btn) {
     const toast = btn.closest('.toast');
 
+    toast.style.height = '0';
+    toast.style.padding = '0 30px';
     toast.classList.add('remove-toast');
     setTimeout(() => toast.remove(), 450);
 }

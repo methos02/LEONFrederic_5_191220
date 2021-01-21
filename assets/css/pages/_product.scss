@@ -1,6 +1,4 @@
 .page__product {
-  margin-top: 30px;
-
   .div-product {
     h1 {
       font-family: "Courgette", sans-serif;
@@ -8,17 +6,26 @@
       font-size: 50px;
       text-align: center;
       font-weight: bold;
-      margin: 40px 0
+      margin: 40px 0;
+
+      @media (max-width: $md) {
+        margin: 0;
+        font-size: 24px;
+      }
     }
 
     &__card {
       display: flex;
+
+      @media (max-width: $md) { flex-direction: column; }
     }
 
     img {
       border-radius: 10px;
       box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
       width: 60vw;
+
+      @media (max-width: $md) {  width: 95vw;}
     }
 
     &__infos {
@@ -27,9 +34,18 @@
       background-color: $primary;
       padding: 30px;
       box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+
+      @media (max-width: $md) {
+        margin-top: 15px;
+        margin-left: 0;
+        padding: 15px;
+      }
     }
 
-    &__description { margin-bottom: 30px; }
+    &__description {
+      margin-bottom: 30px;
+      text-align: justify;
+    }
 
     input, select {
       display: inline;
@@ -54,8 +70,13 @@
   }
 
   .div-load {
-    .div-load__animation {position: relative}
-    .animation_head {position: absolute}
+    .div-load__animation {
+      position: relative;
+
+      @media (max-width: $md) { transform: scale(0.7) }
+    }
+
+    .animation_head {position: absolute; }
     .honey { position: relative; }
 
     .head_down {
