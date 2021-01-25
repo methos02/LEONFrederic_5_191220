@@ -66,11 +66,11 @@ function generateRow(product, color) {
     tr.setAttribute('data-product_id', product._id);
     tr.classList.add('product-row');
 
-    tr.innerHTML += '<td class="product-row__delete" data-product_delete><img src="/assets/images/trash.svg" alt="icone de poubelle"></td>';
-    tr.innerHTML += '<td class="product-row__name"><a href="/product.html?id=' + product._id + '&color=' + color.name + '">' + product.name + '</a></td>';
-    tr.innerHTML += '<td class="product-row__color" data-product_color><a href="/product.html?id=' + product._id + '&color=' + color.name + '">' + color.name + '</a></td>';
-    tr.innerHTML += '<td class="product-row__number"><input name="product_numb" type="number" pattern="\\d+" min="1" title="Nombre de produit" value="' + color.nb + '"></td>';
-    tr.innerHTML += '<td class="product-row__price" data-product_price>' + formatPrice(color.nb * product.price) + '</td>';
+    tr.innerHTML += '<td class="product-row__delete"><img src="/assets/images/trash.svg" alt="icone de poubelle" data-product_delete></td>';
+    tr.innerHTML += '<td class="product-row__name" data-label="Nom"><a href="/product.html?id=' + product._id + '&color=' + color.name + '">' + product.name + '</a></td>';
+    tr.innerHTML += '<td class="product-row__color" data-label="Couleur" data-product_color><a href="/product.html?id=' + product._id + '&color=' + color.name + '">' + color.name + '</a></td>';
+    tr.innerHTML += '<td class="product-row__number" data-label="Nombre"><input name="product_numb" type="number" pattern="\\d+" min="1" title="Nombre de produit" value="' + color.nb + '"></td>';
+    tr.innerHTML += '<td class="product-row__price" data-label="Prix Total" data-product_price>' + formatPrice(color.nb * product.price) + '</td>';
 
     return tr;
 }

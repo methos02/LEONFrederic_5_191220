@@ -27,7 +27,7 @@
     </a>
 </nav>
 <div class="container-custom page-panier">
-    <section class="div-load" id="div-load">
+    <section class="div-load" id="div-load" style="display: none">
         <div class="div-load__animation">
             <img src="assets/images/honey-note.png" class="honey-note" alt="Note pot de miel">
             <img src="assets/images/honey-note.png" class="honey-note" alt="Note pot de miel">
@@ -49,14 +49,11 @@
                 </tr>
                 </thead>
                 <tbody id="panier-table__body"></tbody>
-                <tfoot>
-                <tr>
-                    <td colspan="2"></td>
-                    <td class="panier-table__table-footer" colspan="2"> Facture Totale</td>
-                    <td class="product-row__number" data-total_price></td>
-                </tr>
-                </tfoot>
             </table>
+            <div class="panier-table__total-bill">
+                <span class="panier-table__table-footer"> Facture Totale</span>
+                <span class="product-row__number" data-total_price></span>
+            </div>
             <div class="panier-table__row-btn">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modal-order"> Passer commande </button>
             </div>
