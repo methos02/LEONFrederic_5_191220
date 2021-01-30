@@ -1,3 +1,5 @@
 /node_modules
 /.idea
 package-lock.json
+/public/asset/css/app.css
+/public/asset/css/app.css.map

@@ -1,5 +1,54 @@
 .page__product {
   .div-product {
+    &__card {
+      display: flex;
+      border-radius: 10px;
+
+      @media (max-width: $md) {
+        flex-direction: column;
+        box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+      }
+    }
+
+    &__img {
+      border-radius: 10px;
+      box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+      overflow: hidden;
+      background-color: $primary;
+      width: 60vw;
+
+      @media (max-width: $md) {
+        border-radius: 10px 10px 0 0;
+        padding: 15px;
+        width: auto;
+        box-shadow: none;
+      }
+
+      img { width: 100%}
+    }
+
+    &__infos {
+      width: 35vw;
+      margin-left: 30px;
+      border-radius: 10px;
+      background-color: $primary;
+      padding: 30px;
+      font-size: 1.4rem;
+      box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+
+      @media (max-width: $md) {
+        margin-left: 0;
+        border-radius: 0 0 10px 10px ;
+        box-shadow: none;
+        width: auto;
+      }
+
+      @media (max-width: $sm) {
+        font-size: 1rem;
+        padding: 15px;
+      }
+    }
+
     h1 {
       font-family: "Courgette", sans-serif;
       color: $secondary;
@@ -9,36 +58,13 @@
       margin: 40px 0;
 
       @media (max-width: $md) {
-        margin: 0;
-        font-size: 24px;
+        margin: 0 0 30px;
+        font-size: 4rem;
       }
-    }
 
-    &__card {
-      display: flex;
-
-      @media (max-width: $md) { flex-direction: column; }
-    }
-
-    img {
-      border-radius: 10px;
-      box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
-      width: 60vw;
-
-      @media (max-width: $md) {  width: 95vw;}
-    }
-
-    &__infos {
-      margin-left: 30px;
-      border-radius: 10px;
-      background-color: $primary;
-      padding: 30px;
-      box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
-
-      @media (max-width: $md) {
-        margin-top: 15px;
-        margin-left: 0;
-        padding: 15px;
+      @media (max-width: $sm) {
+        margin: 0 0 15px;
+        font-size: 3rem;
       }
     }
 
@@ -47,76 +73,37 @@
       text-align: justify;
     }
 
-    input, select {
-      display: inline;
-      text-align: right;
-      padding: 5px;
-      height: auto;
-    }
+    &__form {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-    .colors { width: 150px; }
-    .nb_product {
-      width: 50px;
-      margin-bottom: 15px;
-    }
+      @media (max-width: $sm) {
+        flex-direction: column;
+        align-items: stretch;
 
-    &__price {
-      margin-top: 15px;
-      color: $secondary;
-      text-align: right;
-      font-weight: bold;
-      font-size: 20px;
-    }
-  }
+        > :not(:last-child) {
+          margin-bottom: 10px;
+        }
+      }
 
-  .div-load {
-    .div-load__animation {
-      position: relative;
+      input, select {
+        display: inline;
+        text-align: right;
+        padding: 5px;
+        height: auto;
+      }
 
-      @media (max-width: $md) { transform: scale(0.7) }
-    }
+      .colors { width: 150px; }
+      .nb_product { width: 50px; }
 
-    .animation_head {position: absolute; }
-    .honey { position: relative; }
-
-    .head_down {
-      top: 200px;
-      left: 0;
-      animation: head_down 3000ms infinite;
-    }
-
-    .head_up {
-      left: 65px;
-      top: 90px;
-      animation: head_up 3000ms infinite;
-    }
-
-    .head_side {
-      right: 65px;
-      top: 90px;
-      animation: head_side 3000ms infinite;
-    }
-
-    @keyframes head_down {
-      0% { left: 0; }
-      25% { left: -75px; }
-      33% { left: 0; }
-      100% { left: 0; }
-    }
-
-    @keyframes head_side {
-      0% { right: 65px; }
-      33% { right: 65px; }
-      58% { right: -23px; }
-      66% { right: 65px; }
-      100% { right: 65px; }
-    }
-
-    @keyframes head_up {
-      0% { top: 90px; }
-      66% { top: 90px; }
-      92% { top: 10px; }
-      100% { top: 90px; }
+      &-price {
+        margin-top: 15px;
+        color: $secondary;
+        text-align: right;
+        font-weight: bold;
+        font-size: 20px;
+      }
     }
   }
 }

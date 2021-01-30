@@ -1,10 +1,14 @@
 {
-  "name": "orinoco-backend",
+  "name": "orinoco",
   "version": "1.0.0",
-  "description": "",
+  "description": "5ème projet formation developper web",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sass": "sass --watch ./public/assets/css/app.scss:./public/assets/css/app.css --style compressed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/methos02/LEONFrederic_5_19122020.git"
   },
   "author": "",
   "license": "ISC",

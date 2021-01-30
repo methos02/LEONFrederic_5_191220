@@ -25,7 +25,7 @@
     </a>
 </nav>
 <div class="container-custom page__product">
-    <section class="div-load" id="div-load">
+    <section class="div-load honeypot" id="div-load">
         <div class="div-load__animation">
             <img src="assets/images/ours_head_down.png" class="animation_head head_down" alt="Pot de miel">
             <img src="assets/images/ours_head_up.png" class="animation_head head_up" alt="Pot de miel">
@@ -36,26 +36,26 @@
     </section>
     <section class="div-product" id="div-product">
         <div class="div-product__card" id="product-card">
-            <img src="/assets/images/blank.png" alt="image du produit" data-product_image>
+            <div class="div-product__img">
+                <img src="assets/images/blank.png" alt="image du produit" data-product_image>
+            </div>
             <div class="div-product__infos">
                 <h1 data-product_name>Produit</h1>
                 <div class="div-product__description" id="div-product__description" data-product_description></div>
-                <div class="div-product__colors">
-                    <label for="colors">Couleur :</label>
-                    <select id="colors" name="colors" class="form-control colors" data-product_colors>
-                        <option>null</option>
-                    </select>
-                </div>
-                <div>
-                    <span>
+                <form class="div-product__form">
+                    <div class="div-product__form-colors">
+                        <label for="colors">Couleur :</label>
+                        <select id="colors" name="colors" class="form-control colors" data-product_colors>
+                            <option>null</option>
+                        </select>
+                    </div>
+                    <div class="div-product__form-number">
                         <label for="nb_product">Nombre :</label>
-                        <span class="product-row__number">
-                            <input id="nb_product" type="number" min="1" name="product_numb" class="form-control nb_product" title="Nombre de produit" value="1">
-                        </span>
-                    </span>
-                    <span class="div-product__price" data-product_price></span>
-                </div>
-                <button class="btn btn-purple" id="add-basket"> Ajouter au panier </button>
+                        <input id="nb_product" type="number" min="1" name="product_numb" class="form-control nb_product" title="Nombre de produit" value="1">
+                        <span class="div-product__form-price" data-product_price></span>
+                    </div>
+                    <button class="btn btn-purple" id="add-basket"> Ajouter au panier </button>
+                </form>
             </div>
         </div>
     </section>

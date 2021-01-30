@@ -17,6 +17,13 @@ nav {
     display: inline-block;
     height: 50px;
   }
+  
+  .nav__logo {
+    @media (max-width: $sm) {
+      transform: scale(0.7);
+      transform-origin: 0 50%;
+    }
+  }
 
   .nav__link-panier {
     position: relative;
@@ -41,5 +48,7 @@ nav {
     }
 
     .empty-basket { opacity: 0}
+
+    @media (max-width: $sm) { transform: scale(0.7) }
   }
 }

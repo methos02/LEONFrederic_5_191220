@@ -1,21 +1,4 @@
 .page__index {
-  .cloud {
-    img {
-      position: absolute;
-      opacity: 0;
-      left: 10px;
-      top: 15px;
-      z-index: 2;
-      animation: load 2.1s infinite;
-    }
-
-    @for $i from 2 through 3 {
-      > :nth-child(#{$i}) {
-        animation-delay: #{($i - 1) * 700}ms;
-      }
-    }
-  }
-
   h1 {
     text-align: center;
     @media (max-width: $sm) {
@@ -43,7 +26,7 @@
       opacity: 0;
 
       @media (max-width: $lg) { width: 48%;  }
-      @media (max-width: $sm) { width: 100%;  }
+      @media (max-width: $sm) { width: auto;  }
 
       img {
         width: 100%;
@@ -60,6 +43,8 @@
           margin: 0 0 15px;
           font-family: 'Courgette', sans-serif;
         }
+
+        &__description { text-align: justify;}
 
         &__price {
           margin-top: 15px;
@@ -101,13 +86,6 @@
 
     .modal-body { text-align: center; }
   }
-}
-
-@keyframes load {
-  0% { transform: translateX(0); }
-  10% { opacity: 1; }
-  80% { opacity: 1; }
-  100% { transform: translateX(169px); }
 }
 
 @keyframes show-load {
