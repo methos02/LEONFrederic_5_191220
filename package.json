@@ -1,19 +1,20 @@
 {
-  "name": "leonfrederic_5_19122020",
+  "name": "orinoco-backend",
   "version": "1.0.0",
-  "description": "5ème projet formation developper web",
-  "main": "index.js",
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "sass": "sass --watch ./assets/css/app.scss:./assets/css/app.css"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/methos02/LEONFrederic_5_19122020.git"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/methos02/LEONFrederic_5_19122020/issues"
-  },
-  "homepage": "https://github.com/methos02/LEONFrederic_5_19122020#readme"
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.3.8",
+    "mongoose-unique-validator": "^2.0.2",
+    "uuid": "^3.3.2"
+  }
 }

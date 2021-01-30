@@ -1,0 +1,23 @@
+footer {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: content-box;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  align-items: center;
+  padding: 1em 2em;
+  font-size: 1.5rem;
+  color: $secondary;
+  background-color: #F3E9F1;
+  box-shadow: rgba(0, 0, 0, 0.24) 0 -3px 8px;
+
+  @media (max-width: $md) {
+    padding: 0.5em 0.5em;
+    font-size: 1em;
+  }
+
+  > a, > a:visited { color: $secondary; }
+  > a:hover {color: darken($secondary, 10%)}
+}

@@ -1,0 +1,191 @@
+.page-panier {
+  .panier-table {
+    .title {
+      margin-top: 0;
+
+      @media (max-width: $lg) {
+        font-size: 30px;
+        text-align: center;
+        margin: 15px;
+      }
+    }
+
+    &__card {
+      width: 60vw;
+      margin: auto;
+      background-color: $primary;
+      box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+      border-radius: 5px;
+      padding: 2.5rem;
+
+      @media (max-width: $lg) {
+        width: 95vw;
+        padding: 0.5rem;
+      }
+    }
+
+    &__table {
+      width: 100%;
+
+      thead th, tfoot td { padding: 10px 0; }
+
+      tbody tr:nth-child(even) { background-color: darken($primary, 3%); }
+      tbody tr:nth-child(odd) { background-color: lighten($primary, 4%); }
+
+      @media (max-width: $sm) { thead  { display: none; } }
+    }
+
+    .product-row {
+      transition: height 150ms, background-color 300ms;
+
+      @media (max-width: $sm) {
+        height: 170px;
+      }
+
+      @media (min-width: $md) {
+        transition: font-size 150ms, background-color 300ms;
+
+        img, input {transition: height 150ms;}
+      }
+
+      &__delete {
+        text-align: center;
+        width: 50px;
+        cursor: pointer;
+        line-height: 10px;
+
+        @media (max-width: $sm) {
+          position: absolute;
+          right: -5px;
+          top: -10px;
+          background-color: white;
+          height: 30px;
+          width: 30px;
+          border-radius: 40px;
+          box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+          line-height: 24px;
+        }
+      }
+
+      &__name a,  &__color a {
+        text-decoration: underline !important;
+        display: flex;
+
+        @media (max-width: $sm) {display: inline;}
+      }
+      &__color {  width: 120px; }
+      &__price, &__number {
+        width: 100px;
+        text-align: center;
+
+        input { width: 55px; }
+      }
+
+      @media (max-width: $sm) {
+        display: block;
+        position: relative;
+        margin-bottom: 1em;
+        box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+        border-radius: 5px;
+
+        :not(:first-child):before {
+          content: attr(data-label);
+          font-weight: bold;
+          text-transform: uppercase;
+          float: left;
+        }
+
+        td:not(:first-child) {
+          display: block;
+          width: calc(92vw - 1em);
+          text-align: right;
+          padding: 0.5em 1.5em;
+          line-height: 20px;
+          height: 42px;
+        }
+      }
+    }
+
+    &__total-bill {
+      font-weight: bold;
+      text-align: right;
+      height: 42px;
+      line-height: 42px;
+    }
+
+    &__row-btn {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .product-row.remove-row {
+      height: 0;
+      td { opacity: 0;}
+
+      @media (min-width: $md) {
+        font-size: 0;
+        img, input {height: 0;}
+      }
+    }
+  }
+
+  .panier-empty {
+    text-align: center;
+
+    h2 { @media (max-width: $md) { font-size: 35px } }
+  }
+
+  .order-success {
+    position: relative;
+    padding-bottom: 20px;
+    margin: 15px;
+    text-align: center;
+
+    img { margin-bottom: 15px; }
+    p {
+      font-family: 'Courgette', sans-serif;
+      font-size: 1.5rem;
+    }
+
+    .order-success__span-number {
+      position: absolute;
+      bottom: 0;
+      right: 15px;
+      font-size: initial;
+    }
+  }
+
+  .div-load {
+    .div-load__animation {
+      @media (max-width: $md) { transform: scale(0.7) }
+
+      .honey-note {
+        position: absolute;
+        height: 30px;
+        top: 55px;
+        left: 40px;
+        opacity: 0;
+        animation: honey-note 1500ms infinite;
+      }
+
+      @for $i from 2 through 20 {
+        img:nth-child(#{$i}) {
+          animation-delay: #{($i - 1) * 750}ms;
+        }
+      }
+    }
+  }
+
+  @keyframes honey-note {
+    10% {opacity: 1;}
+    12.5% { transform: translateY(20px);}
+    37.5% { transform: translateY(-20px);}
+    62.5% { transform: translateY(20px);}
+    75% {opacity: 1;}
+    87.5% { transform: translateY(-20px);}
+    100% {
+      top: 20px;
+      left: 170px;
+    }
+  }
+}

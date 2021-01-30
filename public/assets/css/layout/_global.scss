@@ -1,0 +1,27 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+body.loading {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container-custom {
+  padding: 110px 2em;
+  min-height: 100vh;
+
+  @media (max-width: $md) { padding: 95px 0.5em 50px; }
+}
+
+a:hover, a:visited, a {
+  color: black;
+  text-decoration: none;
+}
+
+h1, h2 {margin: 0}
+
+.hide { display: none !important;}

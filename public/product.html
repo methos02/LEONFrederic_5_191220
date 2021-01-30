@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Produit - Orinoco</title>
+    <meta name="description" content="Site spécialisé dans la vente d'ourse en peluche">
+
+    <link rel="shortcut icon" href="assets/images/favicon.ico" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="assets/css/app.css" type="text/css" rel="stylesheet">
+
+    <script src="assets/js/commun.js" defer></script>
+    <script src="assets/js/toast.js" defer></script>
+    <script src="assets/js/basket.js" defer></script>
+    <script src="assets/js/pages/product.js" defer></script>
+</head>
+<body class="loading">
+<nav>
+    <a href="index.html"><img src="assets/images/logo.png" alt="logo du site"></a>
+    <a href="panier.html" class="nav__link-panier">
+        <img src="assets/images/panier.png" class="img-basket" alt="icone de panier">
+        <span class="badge_basket empty-basket" id="nb_article"> 0 </span>
+    </a>
+</nav>
+<div class="container-custom page__product">
+    <section class="div-load" id="div-load">
+        <div class="div-load__animation">
+            <img src="assets/images/ours_head_down.png" class="animation_head head_down" alt="Pot de miel">
+            <img src="assets/images/ours_head_up.png" class="animation_head head_up" alt="Pot de miel">
+            <img src="assets/images/ours_head_side.png" class="animation_head head_side" alt="Pot de miel">
+            <img src="assets/images/honey-lg.png" class="honey" alt="Image de pôt de miel">
+        </div>
+        <h2> Chargement en cours </h2>
+    </section>
+    <section class="div-product" id="div-product">
+        <div class="div-product__card" id="product-card">
+            <img src="/assets/images/blank.png" alt="image du produit" data-product_image>
+            <div class="div-product__infos">
+                <h1 data-product_name>Produit</h1>
+                <div class="div-product__description" id="div-product__description" data-product_description></div>
+                <div class="div-product__colors">
+                    <label for="colors">Couleur :</label>
+                    <select id="colors" name="colors" class="form-control colors" data-product_colors>
+                        <option>null</option>
+                    </select>
+                </div>
+                <div>
+                    <span>
+                        <label for="nb_product">Nombre :</label>
+                        <span class="product-row__number">
+                            <input id="nb_product" type="number" min="1" name="product_numb" class="form-control nb_product" title="Nombre de produit" value="1">
+                        </span>
+                    </span>
+                    <span class="div-product__price" data-product_price></span>
+                </div>
+                <button class="btn btn-purple" id="add-basket"> Ajouter au panier </button>
+            </div>
+        </div>
+    </section>
+</div>
+<footer>
+    <span id="copyright">© Copyright <span id="copyright-year"></span></span>
+    <a href="/cgu.html"> Conditions Générales</a>
+</footer>
+</body>
+</html>
