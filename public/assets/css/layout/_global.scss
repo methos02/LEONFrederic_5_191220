@@ -17,7 +17,7 @@ body.loading {
   align-items: center;
 
   @media (max-width: $md) { padding: 95px 2em 50px; }
-  @media (max-width: $sm) { padding: 95px 1em 50px; }
+  @media (max-width: $sm) { padding: 95px 1em 65px; }
 
   > * {width: 100%}
 }
@@ -30,3 +30,10 @@ a:hover, a:visited, a {
 h1, h2 {margin: 0}
 
 .hide { display: none !important;}
+
+.title {
+  color: #905cfb;
+  font-size: 64px;
+  margin: 25px;
+  font-family: 'Courgette', sans-serif;
+}

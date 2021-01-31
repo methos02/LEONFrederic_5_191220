@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    window.onunload = function(){ window.scrollTo(0,0); }
+    window.onunload = () => document.body.scrollTop = document.documentElement.scrollTop = 0;
     const nb_product = getBasket().nb_products;
     updateBadgeBasket(nb_product);
     insertFooterYear();
@@ -34,7 +34,7 @@ function loadPage(content_selector) {
         const div = document.getElementById(content_selector);
 
         const id = setInterval(() => {
-            let div_error = document.getElementById('div_error');
+            let div_error = document.getElementById('container-error');
 
             if(div.innerHTML === '' && div_error === null) { return false; }
 
@@ -104,16 +104,19 @@ function switchElementById(selectorIn, selectorOut) {
  * @param error
  */
 function insertDivError(error) {
-    console.log(error);
-    const div = document.createElement('section');
-    div.classList.add('div_error');
-    div.setAttribute('id', 'div_error');
+    console.error(error);
+    const container = document.createElement('section');
+    container.classList.add('container-error');
+    container.setAttribute('id', 'container-error');
 
+    const div = document.createElement('div');
+    div.classList.add('div-error');
     div.innerHTML += '<h2 class="title"> Un problème a été rencontré. </h2>';
     div.innerHTML += '<img src="/assets/images/ours_sade.png" alt="Image d\'ourse triste">';
     div.innerHTML += '<p> Nous n\'avons pas réussi a récupérer les produits. </p>';
 
-    document.querySelector('.container-custom').appendChild(div);
+    container.appendChild(div);
+    document.querySelector('.container-custom').appendChild(container);
 }
 
 /**

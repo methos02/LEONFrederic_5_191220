@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     getProducts().catch((error) => insertDivError(error));
     loadPage('div-products');
 
-    if( localStorage.getItem('order') !== null ) { showSuccessModal();}
+    if( localStorage.getItem('order') !== null && localStorage.getItem('name') !== null) showSuccessModal();
 });
 
 /**
@@ -43,12 +43,34 @@ function insertProducts(product) {
  * Show Modal when success order
  */
 function showSuccessModal() {
-    const myModal = new bootstrap.Modal(document.getElementById('modal-success'));
-    document.getElementById('order_name').innerText = localStorage.getItem('name');
-    document.getElementById('order_number').innerText = localStorage.getItem('order');
+    generateSuccessModal();
 
+    const myModal = new bootstrap.Modal(document.getElementById('modal-success'));
     setTimeout(() => myModal.show(), 3000);
 
-    localStorage.removeItem('name');
-    localStorage.removeItem('order');
+    // localStorage.removeItem('name');
+    // localStorage.removeItem('order');
+}
+
+/**
+ * Generate Modal when success order
+ */
+function generateSuccessModal() {
+    const section_modal = document.createElement('section');
+    section_modal.classList.add('modal','fade','modal-success');
+    section_modal.setAttribute('id', 'modal-success');
+    section_modal.setAttribute('tabIndex', '-1');
+    section_modal.innerHTML = '<div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content"></div></div>';
+
+    const modal_body = document.createElement('div');
+    modal_body.classList.add('modal-body');
+
+    modal_body.innerHTML = '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+    modal_body.innerHTML += '<img src="assets/images/ours_happy.png" alt="icone de success">';
+    modal_body.innerHTML += '<h2 class="title"> Merci ' + localStorage.getItem('name') + '!</h2>';
+    modal_body.innerHTML += '<h3 class="order-success__span-number">Votre numéro de commande </h3>';
+    modal_body.innerHTML += '<p>' +  localStorage.getItem('order') + '</p>';
+
+    section_modal.querySelector('.modal-content').appendChild(modal_body);
+    document.querySelector('.container-custom').appendChild(section_modal);
 }

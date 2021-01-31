@@ -148,7 +148,7 @@ async function sendForm(e) {
 
     localStorage.setItem('order', result.orderId);
     localStorage.setItem('name', result.contact.firstName);
-    emptyBasket();
+    //emptyBasket();
     window.location.replace("/index.html");
 }
 
