@@ -48,8 +48,8 @@ function showSuccessModal() {
     const myModal = new bootstrap.Modal(document.getElementById('modal-success'));
     setTimeout(() => myModal.show(), 3000);
 
-    // localStorage.removeItem('name');
-    // localStorage.removeItem('order');
+    localStorage.removeItem('name');
+    localStorage.removeItem('order');
 }
 
 /**

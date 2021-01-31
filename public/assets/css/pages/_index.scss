@@ -1,6 +1,9 @@
 .page__index {
   h1 {
     text-align: center;
+
+    @media(min-width: $md) { font-size: 3.5rem; }
+
     @media (max-width: $sm) {
       font-size: 32px;
       margin: 10px;

@@ -74,7 +74,15 @@
     }
 
     &__form-colors, &__form-number {
-      margin-bottom: 20px;
+      @media (min-width: $lg) { margin-bottom: 20px; }
+    }
+
+    &__form-price {
+      margin-top: 15px;
+      color: $secondary;
+      text-align: right;
+      font-weight: bold;
+      font-size: 20px;
     }
 
     &__inputs {
@@ -101,14 +109,6 @@
 
       .colors { width: 150px; }
       .nb_product { width: 50px; }
-
-      &-price {
-        margin-top: 15px;
-        color: $secondary;
-        text-align: right;
-        font-weight: bold;
-        font-size: 20px;
-      }
     }
   }
 }

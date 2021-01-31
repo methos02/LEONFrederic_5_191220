@@ -16,7 +16,7 @@ body.loading {
   display: flex;
   align-items: center;
 
-  @media (max-width: $md) { padding: 95px 2em 50px; }
+  @media (max-width: $md) { padding: 95px 2em 75px; }
   @media (max-width: $sm) { padding: 95px 1em 65px; }
 
   > * {width: 100%}
